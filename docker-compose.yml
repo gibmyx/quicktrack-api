@@ -20,10 +20,6 @@ services:
       MARIADB_PASSWORD: ${DB_PASSWORD}
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MARIADB_DATABASE: ${DB_DATABASE}
-      #MARIADB_USER: root
-      #MARIADB_PASSWORD: root
-      #MARIADB_ROOT_PASSWORD: root
-      #MARIADB_DATABASE: quicktrack
     ports:
       - 3306:3306
     networks:
