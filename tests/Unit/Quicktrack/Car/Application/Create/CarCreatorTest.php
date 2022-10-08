@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Quicktrack\Car\Application\Create;
 
+use PHPUnit\Framework\MockObject\MockObject;
+use Quicktrack\Car\Application\Create\CarCreator;
+use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
+use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 use Tests\TestCase;
-use Tests\Unit\Restaurant\Order\Domain\CarMother;
 
 final class CarCreatorTest extends TestCase {
     

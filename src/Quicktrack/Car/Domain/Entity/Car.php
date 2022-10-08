@@ -100,6 +100,61 @@ final class Car
             new DateTimeValueObject()
         );
     }
+
+    public static function fromPrimitives(
+        string $id,
+        string $code,
+        string $brand,
+        string $model,
+        string $color,
+        string $fuel,
+        string $gearbox,
+        float $kilometer,
+        float $price,
+        string $type,
+        string $year,
+        string $status,
+        string $createdAt,
+        string $updatedAt
+    ): self
+    {
+        return new self(
+            new CarId($id),
+            new CarCode($code),
+            new CarBrand($brand),
+            new CarModel($model),
+            new CarColor($color),
+            new CarFuel($fuel),
+            new CarGearbox($gearbox),
+            new CarKilometer($kilometer),
+            new CarPrice($price),
+            new CarType($type),
+            new CarYear($year),
+            new CarStatus($status),
+            new DateTimeValueObject($createdAt),
+            new DateTimeValueObject($updatedAt)
+        );
+    }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'code' => $this->code,
+            'brand' => $this->brand,
+            'model' => $this->model,
+            'color' => $this->color,
+            'fuel' => $this->fuel,
+            'gearbox' => $this->gearbox,
+            'kilometer' => $this->kilometer,
+            'price' => $this->price,
+            'type' => $this->type,
+            'year' => $this->year,
+            'status' => $this->status,
+            'createdAt' => $this->createdAt,
+            'updatedAt' => $this->updatedAt,
+        ];
+    }
 /*
     public function id(): OrderId
     {

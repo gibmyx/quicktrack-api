@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\Car\Domain\ValueObjects;
+namespace Tests\Unit\Quicktrack\Car\Domain;
 
+use Quicktrack\Car\Domain\ValueObjects\CarColor;
 use Tests\Unit\Shared\Domain\NameMother;
 
 final class CarColorMother

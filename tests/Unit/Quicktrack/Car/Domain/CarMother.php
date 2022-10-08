@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Restaurant\Order\Domain;
+namespace Tests\Unit\Quicktrack\Car\Domain;
 
 use Quicktrack\Car\Application\Create\CarCreatorRequest;
 use Quicktrack\Car\Domain\Entity\Car;
 use Quicktrack\Car\Domain\ValueObjects\CarBrand;
 use Quicktrack\Car\Domain\ValueObjects\CarCode;
 use Quicktrack\Car\Domain\ValueObjects\CarColor;
-use Quicktrack\Car\Domain\ValueObjects\CarColorMother;
 use Quicktrack\Car\Domain\ValueObjects\CarFuel;
 use Quicktrack\Car\Domain\ValueObjects\CarGearbox;
 use Quicktrack\Car\Domain\ValueObjects\CarId;
@@ -21,6 +20,7 @@ use Quicktrack\Car\Domain\ValueObjects\CarType;
 use Quicktrack\Car\Domain\ValueObjects\CarYear;
 use Tests\Unit\Quicktrack\Car\Domain\CarBrandMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarCodeMother;
+use Tests\Unit\Quicktrack\Car\Domain\CarColorMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarFuelMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarGearboxMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarIdMother;
