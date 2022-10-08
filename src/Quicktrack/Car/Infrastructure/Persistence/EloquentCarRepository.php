@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\Infrastructure\Repository;
+namespace Quicktrack\Car\Infrastructure\Persistence;
 
 use Quicktrack\Car\Domain\Entity\Car;
 use Quicktrack\Car\Domain\ValueObjects\CarId;
-use Quicktrack\Domain\Contract\CarRepository;
+use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Infrastructure\Eloquent\Models\Car as ModelsCar;
 
 final class EloquentCarRepository implements CarRepository
@@ -44,7 +44,7 @@ final class EloquentCarRepository implements CarRepository
             $modelsCar->status,
             $modelsCar->createdAt,
             $modelsCar->updatedAt,
-        )
+        );
     }
 
 }

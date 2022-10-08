@@ -14,7 +14,10 @@ login-php:
 install-composer:
 	docker-compose run composer composer install
 
-
 .PHONY: require-composer
 require-composer:
 	docker-compose run composer composer require $d
+
+.PHONY: dump-autoload
+dump-autoload:
+	docker-compose run composer composer dump-autoload
