@@ -21,15 +21,18 @@ services:
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MARIADB_DATABASE: ${DB_DATABASE}
     ports:
-      - 3306:3306
+      - '${FORWARD_DB_PORT:-3306}:3306'
     networks:
       - quicktrack_network
-    
+
   app:
     #image: php:8.1-apache
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+          user: developer
+          uid: 1000
     container_name: quicktrack
     ports:
       - 8000:8000
