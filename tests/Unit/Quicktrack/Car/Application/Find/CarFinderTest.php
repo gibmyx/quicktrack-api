@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Quicktrack\Car\Application\Update;
+namespace Tests\Unit\Quicktrack\Car\Application\Find;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use PHPUnit\Framework\MockObject\MockObject;
 use Quicktrack\Car\Application\Create\CarCreator;
-use Quicktrack\Car\Application\Update\CarUpdater;
-use Quicktrack\Car\Application\Update\CarUpdaterRequest;
+use Quicktrack\Car\Application\Find\CarFinder;
+use Quicktrack\Car\Application\Find\CarFinderRequest;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
 use Shared\Domain\Exceptions\DomainNotExistsException;
@@ -19,22 +18,22 @@ use Tests\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarIdMother;
 use Tests\Unit\Shared\Domain\UuidMother;
 
-final class CarUpdaterTest extends TestCase {
-    /**
+final class CarFinderTest extends TestCase {
+    
+    /** 
      * @test
-     */
-    public function itShouldUpdateAValidCarAndReturnNull()
+    */
+    public function itShouldFindACar()
     {
         $car = CarMother::random();
-        $request = CarUpdaterRequestMother::withId($car->id()->value());
+        $request = CarFinderRequestMother::withId($car->id()->value());
 
         $repository = $this->createMock(CarRepository::class);
         $this->shouldFind($repository, $car);
-        $this->shouldSave($repository, $car);
 
-        $response = (new CarUpdater($repository))->__invoke($request);
+        $response = (new CarFinder($repository))->__invoke($request);
 
-        $this->assertNull($response);
+        $this->assertEquals($car, $response);
     }
 
     /**
@@ -45,23 +44,24 @@ final class CarUpdaterTest extends TestCase {
         $this->expectException(DomainNotExistsException::class);
 
         $car = CarMother::random();
-        $request = CarUpdaterRequestMother::withId(UuidMother::random());
+        $request = CarFinderRequestMother::withId(UuidMother::random());
 
         $repository = $this->createMock(CarRepository::class);
         $this->shouldNotFind($repository, $request);
-        $this->shouldSave($repository, $car);
 
-        $response = (new CarUpdater($repository))->__invoke($request);
-
-        $this->assertNull($response);
+        (new CarFinder($repository))->__invoke($request);
     }
 
-    private function shouldSave(MockObject $repository, Car $car): void
+    /** 
+     * @test
+    */
+    /*public function itShouldThrowInvalidArgumentException()
     {
-        $repository->method('update')
-            ->with($this->equalTo($car));
-    }
+        $this->expectException(InvalidArgumentException::class);
 
+        CarCreatorRequestMother::withNegativeKilometer();
+    }
+*/
     private function shouldFind(MockObject $repository, Car $car): void
     {
         $repository->method('find')
@@ -69,7 +69,7 @@ final class CarUpdaterTest extends TestCase {
             ->willReturn($car);
     }
 
-    private function shouldNotFind(MockObject $repository, CarUpdaterRequest $request): void
+    private function shouldNotFind(MockObject $repository, CarFinderRequest $request): void
     {
         $repository->method('find')
             ->with($this->equalTo(CarIdMother::create($request->id())))
