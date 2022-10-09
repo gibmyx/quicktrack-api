@@ -24,6 +24,9 @@ services:
       - '${FORWARD_DB_PORT:-3306}:3306'
     networks:
       - quicktrack_network
+    volumes:
+      - mariadb-data:/var/lib/mysql
+      - mariadb-config:/etc/mysql
 
   app:
     #image: php:8.1-apache
@@ -46,3 +49,7 @@ services:
 
 networks:
   quicktrack_network:
+
+volumes:
+    mariadb-data:
+    mariadb-config:

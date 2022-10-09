@@ -4,6 +4,10 @@ start:
 
 .PHONY: stop
 stop:
+	docker-compose stop
+
+.PHONY: down
+down:
 	docker-compose down
 
 .PHONY: login-php
