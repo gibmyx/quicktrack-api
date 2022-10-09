@@ -37,4 +37,40 @@ final class CarCreatorRequestMother
             CarStatusMother::random()->value()
         );
     }
+
+    public static function withNegativeKilometer(): CarCreatorRequest
+    {
+        return new CarCreatorRequest(
+            CarIdMother::random()->value(),
+            CarCodeMother::random()->value(),
+            CarBrandMother::random()->value(),
+            CarModelMother::random()->value(),
+            CarColorMother::random()->value(),
+            CarFuelMother::random()->value(),
+            CarGearboxMother::random()->value(),
+            CarKilometerMother::create(-40.5)->value(),
+            CarPriceMother::random()->value(),
+            CarTypeMother::random()->value(),
+            CarYearMother::random()->value(),
+            CarStatusMother::random()->value()
+        );
+    }
+
+    public static function withEmptyModel(): CarCreatorRequest
+    {
+        return new CarCreatorRequest(
+            CarIdMother::random()->value(),
+            CarCodeMother::random()->value(),
+            CarBrandMother::random()->value(),
+            CarModelMother::create('')->value(),
+            CarColorMother::random()->value(),
+            CarFuelMother::random()->value(),
+            CarGearboxMother::random()->value(),
+            CarKilometerMother::random()->value(),
+            CarPriceMother::random()->value(),
+            CarTypeMother::random()->value(),
+            CarYearMother::random()->value(),
+            CarStatusMother::random()->value()
+        );
+    }
 }

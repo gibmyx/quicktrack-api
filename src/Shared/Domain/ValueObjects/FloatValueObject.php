@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shared\Domain\ValueObjects;
 
 use Shared\Domain\Exceptions\EmptyArgumentException;
+use Shared\Domain\Exceptions\InvalidArgumentException;
 
 class FloatValueObject
 {
@@ -23,6 +24,12 @@ class FloatValueObject
     public function equals(self $newValue): bool
     {
         return $this->value === $newValue->value();
+    }
+
+    public function onlyPositive(float $value): void
+    {
+        if (0.00 > $value)
+            throw new InvalidArgumentException();
     }
 
     protected function notEmpty(float $value): void

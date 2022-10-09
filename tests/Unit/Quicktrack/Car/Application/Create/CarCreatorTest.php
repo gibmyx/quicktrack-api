@@ -8,6 +8,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Quicktrack\Car\Application\Create\CarCreator;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
+use Shared\Domain\Exceptions\EmptyArgumentException;
+use Shared\Domain\Exceptions\InvalidArgumentException;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 use Tests\TestCase;
 
@@ -28,6 +30,28 @@ final class CarCreatorTest extends TestCase {
 
         $this->assertNull($response);
     }
+
+    /** 
+     * @test
+    */
+    public function itShouldThrowEmptyArgumentException()
+    {
+        $this->expectException(EmptyArgumentException::class);
+
+        CarCreatorRequestMother::withEmptyModel();
+    }
+
+    /** 
+     * @test
+    */
+    public function itShouldThrowInvalidArgumentException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        CarCreatorRequestMother::withNegativeKilometer();
+    }
+
+    
 
     private function shouldSave(MockObject $repository, Car $car): void
     {

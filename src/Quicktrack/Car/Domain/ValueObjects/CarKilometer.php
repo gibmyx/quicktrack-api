@@ -8,12 +8,12 @@ use Shared\Domain\ValueObjects\FloatValueObject;
 
 final class CarKilometer extends FloatValueObject
 {
-    protected $exceptionMessage = "The car kilometer can't be empty";
+    protected $exceptionMessage = "The car kilometer can't be negative";
     protected $exceptionCode = 401;
 
     public function __construct(float $value)
     {
-        $this->notEmpty($value);
+        $this->onlyPositive($value);
 
         parent::__construct($value);
     }
