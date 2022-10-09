@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Quicktrack\Car\Application\Update;
 
-use Quicktrack\Car\Application\Create\CarCreatorRequest;
 use Quicktrack\Car\Application\Update\CarUpdaterRequest;
 use Tests\Unit\Quicktrack\Car\Domain\CarColorMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarBrandMother;
-use Tests\Unit\Quicktrack\Car\Domain\CarCodeMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarFuelMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarGearboxMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarIdMother;

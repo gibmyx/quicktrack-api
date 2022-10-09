@@ -60,7 +60,7 @@ final class CarMother
             $price,
             $type,
             $year,
-            $status,
+            $status
         );
     }
 
@@ -97,6 +97,24 @@ final class CarMother
             CarTypeMother::create($request->type()),
             CarYearMother::create($request->year()),
             CarStatusMother::create($request->status())
+        );
+    }
+
+    public static function withStatus(string $status): Car
+    {
+        return self::create(
+            CarIdMother::random(),
+            CarCodeMother::random(),
+            CarBrandMother::random(),
+            CarModelMother::random(),
+            CarColorMother::random(),
+            CarFuelMother::random(),
+            CarGearboxMother::random(),
+            CarKilometerMother::random(),
+            CarPriceMother::random(),
+            CarTypeMother::random(),
+            CarYearMother::random(),
+            CarStatusMother::create($status)
         );
     }
 }

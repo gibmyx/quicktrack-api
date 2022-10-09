@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Quicktrack\Car\Application\Update;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use PHPUnit\Framework\MockObject\MockObject;
-use Quicktrack\Car\Application\Create\CarCreator;
 use Quicktrack\Car\Application\Update\CarUpdater;
 use Quicktrack\Car\Application\Update\CarUpdaterRequest;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
 use Shared\Domain\Exceptions\DomainNotExistsException;
-use Shared\Domain\Exceptions\EmptyArgumentException;
-use Shared\Domain\Exceptions\InvalidArgumentException;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 use Tests\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarIdMother;

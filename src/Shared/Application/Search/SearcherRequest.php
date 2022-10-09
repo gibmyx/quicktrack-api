@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sys\Shared\Application\Searcher;
+namespace Shared\Application\Search;
 
 class SearcherRequest
 {

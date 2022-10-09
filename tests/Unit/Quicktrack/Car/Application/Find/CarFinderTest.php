@@ -5,14 +5,11 @@ declare(strict_types=1);
 namespace Tests\Unit\Quicktrack\Car\Application\Find;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use Quicktrack\Car\Application\Create\CarCreator;
 use Quicktrack\Car\Application\Find\CarFinder;
 use Quicktrack\Car\Application\Find\CarFinderRequest;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
 use Shared\Domain\Exceptions\DomainNotExistsException;
-use Shared\Domain\Exceptions\EmptyArgumentException;
-use Shared\Domain\Exceptions\InvalidArgumentException;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 use Tests\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarIdMother;
