@@ -34,6 +34,27 @@ final class CarSearcherTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function itShouldNotFindAnyActiveCar()
+    {
+        $car1 = CarMother::withStatus('sold');
+        $car2 = CarMother::withStatus('sold');
+        $car3 = CarMother::withStatus('sold');
+        $response = CarsMother::create();
+
+        $repository = $this->createMock(CarRepository::class);
+        $searcher = new CarSearcher($repository);
+
+        $this->shouldSearchByPropEqualTo($repository, 'status', 'available', $car1, $car2, $car3);
+
+        $this->assertEquals(
+            $response,
+            ($searcher)(CarSearcherRequestMother::byStatus('available'))
+        );
+    }
+
     private function shouldSearchByPropEqualTo(\PHPUnit\Framework\MockObject\MockObject $repository, string $prop, string $value, Car ...$cars)
     {
         $filteredCars = array_filter(
