@@ -29,7 +29,7 @@ class FloatValueObject
     public function onlyPositive(float $value): void
     {
         if (0.00 > $value)
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException($this->exceptionMessage, $this->exceptionCode);
     }
 
     protected function notEmpty(float $value): void

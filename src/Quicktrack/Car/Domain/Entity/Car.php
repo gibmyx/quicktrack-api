@@ -155,35 +155,65 @@ final class Car
             'updatedAt' => $this->updatedAt,
         ];
     }
-/*
-    public function id(): OrderId
+
+    public function id(): CarId
     {
         return $this->id;
     }
 
-    public function code(): OrderCode
+    public function code(): CarCode
     {
         return $this->code;
     }
 
-    public function total(): OrderTotal
+    public function brand(): CarBrand
     {
-        return $this->total;
+        return $this->brand;
     }
 
-    public function tableId(): TableId
+    public function model(): CarModel
     {
-        return $this->tableId;
+        return $this->model;
     }
 
-    public function state(): OrderState
+    public function color(): CarColor
     {
-        return $this->state;
+        return $this->color;
     }
 
-    public function items(): OrderItems
+    public function fuel(): CarFuel
     {
-        return $this->items;
+        return $this->fuel;
+    }
+
+    public function gearbox(): CarGearbox
+    {
+        return $this->gearbox;
+    }
+
+    public function kilometer(): CarKilometer
+    {
+        return $this->kilometer;
+    }
+
+    public function price(): CarPrice
+    {
+        return $this->price;
+    }
+
+    public function type(): CarType
+    {
+        return $this->type;
+    }
+
+    public function year(): CarYear
+    {
+        return $this->year;
+    }
+
+    public function status(): CarStatus
+    {
+        return $this->status;
     }
 
     public function createdAt(): DateTimeValueObject
@@ -196,36 +226,83 @@ final class Car
         return $this->updatedAt;
     }
 
-    public function changeCode(OrderCode $code): void
+    public function changeBrand(CarBrand $brand)
     {
-        if (! $this->code->equals($code)) {
-            $this->code = $code;
+        if (! $this->brand->equals($brand)) {
+            $this->brand = $brand;
             $this->updatedAt = new DateTimeValueObject();
         }
     }
 
-    public function changeTotal(OrderTotal $total): void
+    public function changeModel(CarModel $model)
     {
-        if (! $this->total->equals($total)) {
-        $this->total = $total;
-        $this->updatedAt = new DateTimeValueObject();
-    }
-    }
-
-    public function changeTableId(TableId $tableId): void
-    {
-        if (! $this->tableId->equals($tableId)) {
-            $this->tableId = $tableId;
+        if (! $this->model->equals($model)) {
+            $this->model = $model;
             $this->updatedAt = new DateTimeValueObject();
         }
     }
 
-    public function changeState(OrderState $state): void
+    public function changeColor(CarColor $color)
     {
-        if (! $this->state->equals($state)) {
-            $this->state = $state;
+        if (! $this->color->equals($color)) {
+            $this->color = $color;
             $this->updatedAt = new DateTimeValueObject();
         }
     }
-*/
+
+    public function changeFuel(CarFuel $fuel)
+    {
+        if (! $this->fuel->equals($fuel)) {
+            $this->fuel = $fuel;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
+
+    public function changeGearbox(CarGearbox $gearbox)
+    {
+        if (! $this->gearbox->equals($gearbox)) {
+            $this->brgearboxand = $gearbox;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
+
+    public function changeKilometer(CarKilometer $kilometer)
+    {
+        if (! $this->kilometer->equals($kilometer)) {
+            $this->kilometer = $kilometer;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
+
+    public function changePrice(CarPrice $price)
+    {
+        if (! $this->price->equals($price)) {
+            $this->price = $price;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
+
+    public function changeType(CarType $type)
+    {
+        if (! $this->type->equals($type)) {
+            $this->type = $type;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
+
+    public function changeYear(CarYear $year)
+    {
+        if (! $this->year->equals($year)) {
+            $this->year = $year;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
+
+    public function changeStatus(CarStatus $status)
+    {
+        if (! $this->status->equals($status)) {
+            $this->status = $status;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
 }
