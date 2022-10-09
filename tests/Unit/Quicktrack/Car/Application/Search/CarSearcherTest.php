@@ -34,12 +34,6 @@ final class CarSearcherTest extends TestCase
         );
     }
 
-    private function shouldSearch(\PHPUnit\Framework\MockObject\MockObject $repository, Car ...$cars)
-    {
-        $repository->method('matching')
-            ->willReturn($cars);
-    }
-
     private function shouldSearchByPropEqualTo(\PHPUnit\Framework\MockObject\MockObject $repository, string $prop, string $value, Car ...$cars)
     {
         $filteredCars = array_filter(
