@@ -45,7 +45,8 @@ final class CarCreator
             new CarKilometer($request->kilometer()),
             new CarPrice($request->price()),
             new CarType($request->type()),
-            new CarYear($request->year()),
+            //new CarYear($request->year()),
+            CarYear::createFromFormat('Y', $request->year()),
             new CarStatus($request->status())
         );
 

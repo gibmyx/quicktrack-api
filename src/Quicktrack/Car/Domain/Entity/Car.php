@@ -129,7 +129,8 @@ final class Car
             new CarKilometer($kilometer),
             new CarPrice($price),
             new CarType($type),
-            new CarYear($year),
+            //new CarYear($year),
+            CarYear::createFromFormat('Y', $year),
             new CarStatus($status),
             new DateTimeValueObject($createdAt),
             new DateTimeValueObject($updatedAt)

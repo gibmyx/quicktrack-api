@@ -11,13 +11,14 @@ final class CarYearMother
 {
     public static function create(string $value): CarYear
     {
-        return new CarYear($value);
+        //return new CarYear($value);
+        return CarYear::createFromFormat('Y', $value);
     }
 
     public static function random(): CarYear
     {
         return self::create(
-            DateTimeMother::random()
+            DateTimeMother::randomYear()
         );
     }
 }

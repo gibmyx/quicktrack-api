@@ -18,7 +18,7 @@ final class CarPriceMother
     public static function random(): CarPrice
     {
         return self::create(
-            FloatMother::random()
+            FloatMother::randomPositive()
         );
     }
 }

@@ -22,9 +22,8 @@ return new class extends Migration
                 $table->string('type');
                 $table->year('year');
                 $table->string('status');
-                $table->dateTime('createdAt');
-                $table->dateTime('updatedtedAt');
-    
+                $table->timestamps();
+
                 $table->primary('id');
             });
         }

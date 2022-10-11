@@ -30,7 +30,15 @@ dump-autoload:
 
 .PHONY: test
 test:
-	docker exec quicktrack php artisan test
+	docker compose exec app php artisan test
+
+.PHONY: migrate
+migrate:
+	docker compose exec app php artisan migrate
+
+.PHONY: rollback
+rollback:
+	docker compose exec app php artisan migrate:rollback
 
 .PHONY: db
 db:

@@ -12,4 +12,9 @@ class DateTimeMother
     {
         return Factory::create()->dateTimeBetween('-2 years', '+1 year')->format('Y-m-d H:s:i');
     }
+
+    public static function randomYear(): string
+    {
+        return Factory::create()->dateTimeBetween('-2 years', '+1 year')->format('Y');
+    }
 }

@@ -12,6 +12,7 @@ class Car extends Model
     protected $fillable = [
         'id',
         'code',
+        'brand',
         'color',
         'fuel',
         'gearbox',
@@ -20,8 +21,6 @@ class Car extends Model
         'price',
         'status',
         'type',
-        'year',
-        'createdAt',
-        'updatedAt'
+        'year'
     ];
 }

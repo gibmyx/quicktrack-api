@@ -42,8 +42,8 @@ final class EloquentCarRepository implements CarRepository
             $modelsCar->type,
             $modelsCar->year,
             $modelsCar->status,
-            $modelsCar->createdAt,
-            $modelsCar->updatedAt,
+            $modelsCar->created_at,
+            $modelsCar->updated_at,
         );
     }
 

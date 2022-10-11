@@ -23,11 +23,11 @@ final class CarPostController extends Controller
 
     public function __invoke(Request $request): JsonResponse
     {
-        dd($this->creator, $request);
+        //dd($this->creator, $request);
         ($this->creator)(new CarCreatorRequest(
             $request->input('id'),
             $request->input('code'),
-            $request->input('brad'),
+            $request->input('brand'),
             $request->input('model'),
             $request->input('color'),
             $request->input('fuel'),

@@ -20,7 +20,7 @@ class CarPostControllerTest extends TestCase
     public function itShouldCreateAndSaveAValidCar()
     {
         $car = CarMother::random();
-        $response = $this->post('/api/car', $car->toArray());
+        $response = $this->postJson('/api/car', $car->toArray());
 
         $response->assertStatus(200);
     }
