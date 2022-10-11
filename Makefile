@@ -1,3 +1,5 @@
+include .env
+
 .PHONY: start
 start:
 	docker-compose up -d
@@ -29,3 +31,7 @@ dump-autoload:
 .PHONY: test
 test:
 	docker exec quicktrack php artisan test
+
+.PHONY: db
+db:
+	docker compose exec mariadb mariadb -u ${DB_USERNAME} -p
