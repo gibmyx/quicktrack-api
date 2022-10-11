@@ -20,6 +20,7 @@ login-php:
 install-composer:
 	docker-compose run composer composer install
 
+#make require-composer d:=dependencia
 .PHONY: require-composer
 require-composer:
 	docker-compose run composer composer require $d
@@ -39,6 +40,11 @@ migrate:
 .PHONY: rollback
 rollback:
 	docker compose exec app php artisan migrate:rollback
+
+#make create-migrate m:=NameMigration
+.PHONY: create-migrate
+create-migrate:
+	docker exec quicktrack php artisan make:migration $m
 
 .PHONY: db
 db:
