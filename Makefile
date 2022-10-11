@@ -25,3 +25,7 @@ require-composer:
 .PHONY: dump-autoload
 dump-autoload:
 	docker-compose run composer composer dump-autoload
+
+.PHONY: test
+test:
+	docker exec quicktrack php artisan test

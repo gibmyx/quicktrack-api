@@ -6,7 +6,7 @@ namespace Quicktrack\Car\Infrastructure\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-final class Car extends Model
+class Car extends Model
 {
     protected $table = 'cars';
     protected $fillable = [

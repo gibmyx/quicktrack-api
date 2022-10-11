@@ -7,7 +7,7 @@ namespace Quicktrack\Car\Infrastructure\Persistence;
 use Quicktrack\Car\Domain\Entity\Car;
 use Quicktrack\Car\Domain\ValueObjects\CarId;
 use Quicktrack\Car\Domain\Contract\CarRepository;
-use Quicktrack\Infrastructure\Eloquent\Models\Car as ModelsCar;
+use Quicktrack\Car\Infrastructure\Eloquent\Models\Car as ModelsCar;
 
 final class EloquentCarRepository implements CarRepository
 {
@@ -47,4 +47,8 @@ final class EloquentCarRepository implements CarRepository
         );
     }
 
+    public function matching(array $filters): array
+    {
+        return [];
+    }
 }

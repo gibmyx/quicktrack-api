@@ -136,23 +136,23 @@ final class Car
         );
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            'id' => $this->id,
-            'code' => $this->code,
-            'brand' => $this->brand,
-            'model' => $this->model,
-            'color' => $this->color,
-            'fuel' => $this->fuel,
-            'gearbox' => $this->gearbox,
-            'kilometer' => $this->kilometer,
-            'price' => $this->price,
-            'type' => $this->type,
-            'year' => $this->year,
-            'status' => $this->status,
-            'createdAt' => $this->createdAt,
-            'updatedAt' => $this->updatedAt,
+            'id' => $this->id()->value(),
+            'code' => $this->code()->value(),
+            'brand' => $this->brand()->value(),
+            'model' => $this->model()->value(),
+            'color' => $this->color()->value(),
+            'fuel' => $this->fuel()->value(),
+            'gearbox' => $this->gearbox()->value(),
+            'kilometer' => $this->kilometer()->value(),
+            'price' => $this->price()->value(),
+            'type' => $this->type()->value(),
+            'year' => $this->year()->value(),
+            'status' => $this->status()->value(),
+            'createdAt' => $this->createdAt()->value(),
+            'updatedAt' => $this->updatedAt()->value(),
         ];
     }
 
