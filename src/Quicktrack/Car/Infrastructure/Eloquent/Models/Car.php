@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     protected $table = 'cars';
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = [
         'id',
         'code',
@@ -23,4 +25,6 @@ class Car extends Model
         'type',
         'year'
     ];
+
+    
 }

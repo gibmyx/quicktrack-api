@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Quicktrack\Car\Infrastructure\Persistence;
 
+use DateTime;
 use Quicktrack\Car\Domain\Entity\Car;
 use Quicktrack\Car\Domain\ValueObjects\CarId;
 use Quicktrack\Car\Domain\Contract\CarRepository;
@@ -37,13 +38,13 @@ final class EloquentCarRepository implements CarRepository
             $modelsCar->color,
             $modelsCar->fuel,
             $modelsCar->gearbox,
-            $modelsCar->kilometer,
-            $modelsCar->price,
+            (float)$modelsCar->kilometer,
+            (float)$modelsCar->price,
             $modelsCar->type,
             $modelsCar->year,
             $modelsCar->status,
-            $modelsCar->created_at,
-            $modelsCar->updated_at,
+            $modelsCar->created_at->format('Y-m-d H:i:s'),
+            $modelsCar->updated_at->format('Y-m-d H:i:s'),
         );
     }
 

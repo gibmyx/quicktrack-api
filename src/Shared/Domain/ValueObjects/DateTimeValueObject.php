@@ -34,8 +34,8 @@ class DateTimeValueObject
     {
         try {
             $date = $date != 'now'
-                ? (new DateTimeImmutable($date))->format('Y-m-d H:s:i')
-                : date('Y-m-d H:s:i');
+                ? (new DateTimeImmutable($date))->format('Y-m-d H:i:s')
+                : date('Y-m-d H:i:s');
 
             $explodedDate = explode('-', $date);
 
@@ -61,7 +61,7 @@ class DateTimeValueObject
         $dateTimeImmutable = new \DateTimeImmutable;
 
         return new static(
-            $dateTimeImmutable->format('Y-m-d H:s:i')
+            $dateTimeImmutable->format('Y-m-d H:i:s')
         );
     }
 
