@@ -10,7 +10,6 @@ class EmailHistory extends Model
 {
     protected $table = 'emails_history';
     protected $keyType = 'string';
-    public $timestamps = false;
     public $incrementing = false;
     protected $fillable = [
         'id',
@@ -18,8 +17,6 @@ class EmailHistory extends Model
         'name',
         'email',
         'phone',
-        'type',
-        'created_at',
-        'updated_at',
+        'type'
     ];
 }

@@ -16,7 +16,7 @@ final class EmailHistoryCodeMother
         return new EmailHistoryCode($code);
     }
 
-    public static function ramdon()
+    public static function random()
     {
         return self::create(
             CodeMother::random()

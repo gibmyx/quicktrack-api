@@ -14,7 +14,7 @@ final class EmailHistoryIdMother
         return new EmailHistoryId($id);
     }
 
-    public static function ramdon()
+    public static function random()
     {
         return self::create(
             UuidMother::random()

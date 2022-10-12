@@ -20,13 +20,13 @@ final class EmailHistoryRequestMother
     public static function random(): EmailHistoryCreatorRequest
     {
         return new EmailHistoryCreatorRequest(
-            EmailHistoryIdMother::ramdon()->value(),
-            EmailHistoryCodeMother::ramdon()->value(),
-            EmailHistoryNameMother::ramdon()->value(),
-            EmailHistoryEmailMother::ramdon()->value(),
-            EmailHistoryPhoneMother::ramdon()->value(),
-            EmailHistoryMessageMother::ramdon()->value(),
-            EmailHistoryTypeMother::ramdon()->value(),
+            EmailHistoryIdMother::random()->value(),
+            EmailHistoryCodeMother::random()->value(),
+            EmailHistoryNameMother::random()->value(),
+            EmailHistoryEmailMother::random()->value(),
+            EmailHistoryPhoneMother::random()->value(),
+            EmailHistoryMessageMother::random()->value(),
+            EmailHistoryTypeMother::random()->value(),
         );
     }
 }

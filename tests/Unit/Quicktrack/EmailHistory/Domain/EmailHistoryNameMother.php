@@ -14,7 +14,7 @@ final class EmailHistoryNameMother
         return new EmailHistoryName($name);
     }
 
-    public static function ramdon()
+    public static function random()
     {
         return self::create(
             NameMother::random()

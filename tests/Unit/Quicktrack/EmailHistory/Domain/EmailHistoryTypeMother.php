@@ -14,7 +14,7 @@ final class EmailHistoryTypeMother
         return new EmailHistoryType($phone);
     }
 
-    public static function ramdon()
+    public static function random()
     {
         return self::create(
             NameMother::random()

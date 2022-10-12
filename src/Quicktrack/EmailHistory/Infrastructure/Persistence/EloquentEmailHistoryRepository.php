@@ -38,8 +38,8 @@ final class EloquentEmailHistoryRepository implements EmailHistoryRepository
             $modelsEmailHistory->messege,
             $modelsEmailHistory->type,
             $modelsEmailHistory->status,
-            $modelsEmailHistory->created_at,
-            $modelsEmailHistory->updated_at,
+            $modelsEmailHistory->created_at->format('Y-m-d H:i:s'),
+            $modelsEmailHistory->updated_at->format('Y-m-d H:i:s'),
         );
     }
 

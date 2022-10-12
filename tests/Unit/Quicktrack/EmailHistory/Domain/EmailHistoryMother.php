@@ -24,7 +24,7 @@ final class EmailHistoryMother
         EmailHistoryEmail $email,
         EmailHistoryPhone $phone,
         EmailHistoryMessage $message,
-        EmailHistoryType $type,
+        EmailHistoryType $type
     ): EmailHistory
     {
         return EmailHistory::create(
@@ -34,7 +34,20 @@ final class EmailHistoryMother
             $email,
             $phone,
             $message,
-            $type,
+            $type
+        );
+    }
+
+    public static function random(): EmailHistory
+    {
+        return self::create(
+            EmailHistoryIdMother::random(),
+            EmailHistoryCodeMother::random(),
+            EmailHistoryNameMother::random(),
+            EmailHistoryEmailMother::random(),
+            EmailHistoryPhoneMother::random(),
+            EmailHistoryMessageMother::random(),
+            EmailHistoryTypeMother::random()
         );
     }
 
@@ -47,7 +60,7 @@ final class EmailHistoryMother
             EmailHistoryEmailMother::create($request->email()),
             EmailHistoryPhoneMother::create($request->phone()),
             EmailHistoryMessageMother::create($request->message()),
-            EmailHistoryTypeMother::create($request->type()),
+            EmailHistoryTypeMother::create($request->type())
         );
     }
 }

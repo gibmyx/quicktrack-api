@@ -14,7 +14,7 @@ final class EmailHistoryMessageMother
         return new EmailHistoryMessage($phone);
     }
 
-    public static function ramdon()
+    public static function random()
     {
         return self::create(
             LongTextMother::random()
