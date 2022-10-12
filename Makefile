@@ -2,36 +2,41 @@ include .env
 
 .PHONY: start
 start:
-	docker-compose up -d
+	docker compose up -d
 
 .PHONY: stop
 stop:
-	docker-compose stop
+	docker compose stop
 
 .PHONY: down
 down:
-	docker-compose down
+	docker compose down
 
 .PHONY: login-php
 login-php:
-	docker-compose exec app sh
+	docker compose exec app sh
 
 .PHONY: install-composer
 install-composer:
-	docker-compose run composer composer install
+	docker compose run composer composer install
 
 #make require-composer d:=dependencia
 .PHONY: require-composer
 require-composer:
-	docker-compose run composer composer require $d
+	docker compose run composer composer require $d
 
 .PHONY: dump-autoload
 dump-autoload:
-	docker-compose run composer composer dump-autoload
+	docker compose run composer composer dump-autoload
 
 .PHONY: test
 test:
-	docker-compose exec app php artisan test
+	docker compose exec app php artisan test
+
+#make require-composer f:=context
+.PHONY: test-filter
+test-filter:
+	docker compose exec app php artisan test --filter $f
 
 .PHONY: migrate
 migrate:
