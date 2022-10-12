@@ -8,11 +8,8 @@ use Shared\Domain\Exceptions\EmptyArgumentException;
 
 class StringValueObject
 {
-    private $value;
-
-    public function __construct(string $value)
+    public function __construct(private string $value)
     {
-        $this->value = $value;
     }
 
     public function value(): string

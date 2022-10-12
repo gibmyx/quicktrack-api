@@ -10,14 +10,12 @@ use Quicktrack\Car\Domain\Services\CarFinder as ServicesCarFinder;
 
 final class CarFinder
 {
-    private $repository;
     private $finder;
 
     public function __construct(
-        CarRepository $repository
+        private CarRepository $repository
     )
     {
-        $this->repository = $repository;
         $this->finder = new ServicesCarFinder($repository);
     }
 

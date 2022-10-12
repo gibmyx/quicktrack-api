@@ -8,11 +8,8 @@ use Faker\Factory;
 
 final class FileMother
 {
-    private $file;
-
-    private function __construct(string $file)
+    private function __construct(private string $file)
     {
-        $this->file = $file;
     }
 
     public static function random(): self

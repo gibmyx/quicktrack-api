@@ -6,43 +6,20 @@ namespace Quicktrack\Car\Application\Update;
 
 final class CarUpdaterRequest
 {
-    private $id;
-    private $brand;
-    private $model;
-    private $color;
-    private $fuel;
-    private $gearbox;
-    private $kilometer;
-    private $price;
-    private $type;
-    private $year;
-    private $status;
-
     public function __construct(
-        string $id,
-        string $brand,
-        string $model,
-        string $color,
-        string $fuel,
-        string $gearbox,
-        float $kilometer,
-        float $price,
-        string $type,
-        string $year,
-        string $status
+        private string $id,
+        private string $brand,
+        private string $model,
+        private string $color,
+        private string $fuel,
+        private string $gearbox,
+        private float $kilometer,
+        private float $price,
+        private string $type,
+        private string $year,
+        private string $status
     )
     {
-        $this->id = $id;
-        $this->brand = $brand;
-        $this->model = $model;
-        $this->color = $color;
-        $this->fuel = $fuel;
-        $this->gearbox = $gearbox;
-        $this->kilometer = $kilometer;
-        $this->price = $price;
-        $this->type = $type;
-        $this->year = $year;
-        $this->status = $status;
     }
 
     public function id(): string

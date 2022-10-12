@@ -9,11 +9,8 @@ use Shared\Domain\Exceptions\InvalidArgumentException;
 
 class FloatValueObject
 {
-    private $value;
-
-    public function __construct(float $value)
+    public function __construct(private float $value)
     {
-        $this->value = $value;
     }
 
     public function value(): float

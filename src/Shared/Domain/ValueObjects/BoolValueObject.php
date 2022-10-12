@@ -6,11 +6,8 @@ namespace Shared\Domain\ValueObjects;
 
 class BoolValueObject
 {
-    private $value;
-
-    public function __construct(bool $value)
+    public function __construct(private bool $value)
     {
-        $this->value = $value;
     }
 
     public function value(): bool

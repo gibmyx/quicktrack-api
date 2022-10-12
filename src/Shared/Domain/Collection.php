@@ -9,13 +9,11 @@ use function Lambdish\Phunctional\each;
 
 abstract class Collection implements \Countable, \IteratorAggregate
 {
-    private $items;
-
-    public function __construct(array $items)
+    public function __construct(
+        private array $items
+    )
     {
         $this->ensureInstanceOf($this->type(), $items);
-
-        $this->items = $items;
     }
 
     abstract protected function type(): string;

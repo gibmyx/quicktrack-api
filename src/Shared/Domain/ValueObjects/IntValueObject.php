@@ -8,11 +8,8 @@ use Shared\Domain\Exceptions\EmptyArgumentException;
 
 class IntValueObject
 {
-    private $value;
-
-    public function __construct(int $value)
+    public function __construct(private int $value)
     {
-        $this->value = $value;
     }
 
     public function value(): int

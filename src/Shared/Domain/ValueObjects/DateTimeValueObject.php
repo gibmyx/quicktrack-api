@@ -9,9 +9,10 @@ use Shared\Domain\Exceptions\InvalidDateException;
 
 class DateTimeValueObject
 {
-    private $date;
-
-    public function __construct(string $date = 'now', ?string $format = null)
+    public function __construct(
+        private string $date = 'now', 
+        ?string $format = null
+    )
     {
         $this->date = $this->setDate($date, $format);
     }

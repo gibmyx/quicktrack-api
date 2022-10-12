@@ -20,52 +20,23 @@ use Shared\Domain\ValueObjects\DateTimeValueObject;
 
 final class Car
 {
-    private $id;
-    private $code;
-    private $brand;
-    private $model;
-    private $color;
-    private $fuel;
-    private $gearbox;
-    private $kilometer;
-    private $price;
-    private $type;
-    private $year;
-    private $status;
-    private $createdAt;
-    private $updatedAt;
-
-    public function __construct(
-        CarId $id,
-        CarCode $code,
-        CarBrand $brand,
-        CarModel $model,
-        CarColor $color,
-        CarFuel $fuel,
-        CarGearbox $gearbox,
-        CarKilometer $kilometer,
-        CarPrice $price,
-        CarType $type,
-        CarYear $year,
-        CarStatus $status,
-        DateTimeValueObject $createdAt,
-        DateTimeValueObject $updatedAt
+    private function __construct(
+        private CarId $id,
+        private CarCode $code,
+        private CarBrand $brand,
+        private CarModel $model,
+        private CarColor $color,
+        private CarFuel $fuel,
+        private CarGearbox $gearbox,
+        private CarKilometer $kilometer,
+        private CarPrice $price,
+        private CarType $type,
+        private CarYear $year,
+        private CarStatus $status,
+        private DateTimeValueObject $createdAt,
+        private DateTimeValueObject $updatedAt
     )
     {
-        $this->id = $id;
-        $this->code = $code;
-        $this->brand = $brand;
-        $this->model = $model;
-        $this->color = $color;
-        $this->fuel = $fuel;
-        $this->gearbox = $gearbox;
-        $this->kilometer = $kilometer;
-        $this->price = $price;
-        $this->type = $type;
-        $this->year = $year;
-        $this->status = $status;
-        $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
     }
 
     public static function create(
@@ -129,7 +100,6 @@ final class Car
             new CarKilometer($kilometer),
             new CarPrice($price),
             new CarType($type),
-            //new CarYear($year),
             CarYear::createFromFormat('Y', $year),
             new CarStatus($status),
             new DateTimeValueObject($createdAt),

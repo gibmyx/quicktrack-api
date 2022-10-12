@@ -6,10 +6,8 @@ namespace Shared\Application\Search;
 
 class SearcherRequest
 {
-    private $filters;
-
     public function __construct(
-        array $filters
+        private array $filters
     )
     {
         $this->filters = $filters;

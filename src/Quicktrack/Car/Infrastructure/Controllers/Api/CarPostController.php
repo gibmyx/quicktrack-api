@@ -12,18 +12,14 @@ use Quicktrack\Car\Application\Create\CarCreatorRequest;
 
 final class CarPostController extends Controller
 {
-    private $creator;
-
     public function __construct(
-        CarCreator $creator
+        private CarCreator $creator
     )
     {
-        $this->creator = $creator;
     }
 
     public function __invoke(Request $request): JsonResponse
     {
-        //dd($this->creator, $request);
         ($this->creator)(new CarCreatorRequest(
             $request->input('id'),
             $request->input('code'),

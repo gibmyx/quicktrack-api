@@ -20,14 +20,12 @@ use Quicktrack\Car\Domain\ValueObjects\CarYear;
 
 final class CarUpdater
 {
-    private $repository;
     private $finder;
 
     public function __construct(
-        CarRepository $repository
+        private CarRepository $repository
     )
     {
-        $this->repository = $repository;
         $this->finder = new CarFinder($repository);
     }
 

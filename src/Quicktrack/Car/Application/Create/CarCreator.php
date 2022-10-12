@@ -21,13 +21,10 @@ use Quicktrack\Car\Domain\Contract\CarRepository;
 
 final class CarCreator
 {
-    private $repository;
-
     public function __construct(
-        CarRepository $repository
+        private CarRepository $repository
     )
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(

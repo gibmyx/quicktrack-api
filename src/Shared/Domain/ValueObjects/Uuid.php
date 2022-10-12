@@ -9,13 +9,9 @@ use Ramsey\Uuid\Uuid as RamseyUuid;
 
 class Uuid
 {
-    private $uuid;
-
-    public function __construct(string $uuid)
+    public function __construct(private string $uuid)
     {
         $this->ensureIsValidUuid($uuid);
-
-        $this->uuid = $uuid;
     }
 
     public static function random(): self

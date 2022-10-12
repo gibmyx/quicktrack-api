@@ -10,13 +10,10 @@ use Shared\Domain\Exceptions\DomainNotExistsException;
 
 final class CarFinder
 {
-    private $repository;
-
     public function __construct(
-        CarRepository $repository
+        private CarRepository $repository
     )
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(

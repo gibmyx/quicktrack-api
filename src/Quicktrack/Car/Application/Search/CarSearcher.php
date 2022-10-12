@@ -9,11 +9,10 @@ use Quicktrack\Car\Domain\Contract\CarRepository;
 
 final class CarSearcher
 {
-    private $repository;
-
-    public function __construct(CarRepository $repository)
+    public function __construct(
+        private CarRepository $repository
+    )
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(CarSearcherRequest $request): Cars
