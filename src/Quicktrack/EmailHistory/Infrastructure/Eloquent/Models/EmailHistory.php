@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class EmailHistory extends Model
 {
     protected $table = 'emails_history';
+    protected $keyType = 'string';
     public $timestamps = false;
+    public $incrementing = false;
     protected $fillable = [
         'id',
         'code',

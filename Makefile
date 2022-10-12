@@ -31,7 +31,7 @@ dump-autoload:
 
 .PHONY: test
 test:
-	docker compose exec app php artisan test
+	docker-compose exec app php artisan test
 
 .PHONY: migrate
 migrate:

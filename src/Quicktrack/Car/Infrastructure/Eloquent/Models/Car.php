@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     protected $table = 'cars';
-    public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
+    public $incrementing = false;
     protected $fillable = [
         'id',
         'code',
@@ -26,5 +27,5 @@ class Car extends Model
         'year'
     ];
 
-    
+
 }
