@@ -4,17 +4,12 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Quicktrack\User\Infrastructure\Eloquent\Models\User;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Quicktrack\Auth\Infrastructure\Eloquent\Models\User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = User::class;
+
     public function definition()
     {
         return [

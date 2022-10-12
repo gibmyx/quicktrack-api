@@ -54,3 +54,7 @@ create-migrate:
 .PHONY: db
 db:
 	docker compose exec mariadb mariadb -u ${DB_USERNAME} -p
+
+.PHONY: chekout_makefile
+chekout_makefile:
+	git checkout /Makefile
