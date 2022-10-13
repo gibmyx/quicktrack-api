@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Quicktrack\Car;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 
 class CarPostControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseTransactions;
 
     /**
      * @test
