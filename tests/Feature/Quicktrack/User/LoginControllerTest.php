@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\Feature\Quicktrack\User;
 
 use Tests\TestCase;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Quicktrack\User\Infrastructure\Eloquent\Models\User;
 

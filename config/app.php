@@ -195,6 +195,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // HEXAGONAL ZONE //
+        // STATUS - SYSTEM //
+        \Quicktrack\User\Infrastructure\Services\DependencyServiceProvider::class
     ],
 
     /*
