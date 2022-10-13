@@ -24,15 +24,30 @@ final class LoginController extends Controller
         }
 
         if (!$token = JWTAuth::attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return new JsonResponse(
+                [
+                    'ok' => false,
+                    'content' => [],
+                    'error' => []
+                ],
+                JsonResponse::HTTP_BAD_REQUEST
+            );
         }
 
-        return response()->json([
-            'user' => auth()->user(),
-            'authorisation' => [
-                'access_token' => $token,
-                'token_type' => 'bearer',
-            ]
-        ]);
+        return new JsonResponse(
+            [
+                'ok' => true,
+                'content' => [
+                    'user' => [
+                        "id" => auth()->user()->id,
+                        "name" => auth()->user()->name,
+                        "email" => auth()->user()->email,
+                    ],
+                    'authorization' => ['access_token' => $token, 'token_type' => 'bearer',]
+                ],
+                'error' => []
+            ],
+            JsonResponse::HTTP_OK
+        );
     }
 }
