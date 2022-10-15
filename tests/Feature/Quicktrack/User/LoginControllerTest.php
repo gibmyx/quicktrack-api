@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\Feature\Quicktrack\User;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
 use Quicktrack\User\Infrastructure\Eloquent\Models\User;
+use Tests\Shared\Infrastructure\Laravel\TestCase;
 
 final class LoginControllerTest extends TestCase
 {
