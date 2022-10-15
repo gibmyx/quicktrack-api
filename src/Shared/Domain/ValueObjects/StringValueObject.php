@@ -6,7 +6,7 @@ namespace Shared\Domain\ValueObjects;
 
 use Shared\Domain\Exceptions\EmptyArgumentException;
 
-class StringValueObject
+class StringValueObject extends ValueObject
 {
     public function __construct(private string $value)
     {
@@ -25,6 +25,8 @@ class StringValueObject
     protected function notEmpty(string $value): void
     {
         if (empty($value))
-            throw new EmptyArgumentException($this->exceptionMessage, $this->exceptionCode);
+            $this->addError(
+                new EmptyArgumentException($this->exceptionMessage, $this->exceptionCode)
+            );
     }
 }

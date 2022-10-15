@@ -18,6 +18,8 @@ class EmailValueObject extends StringValueObject
     private function ensureIsValidEmail(string $value)
     {
         if (! filter_var($value, FILTER_VALIDATE_EMAIL))
-            throw new InvalidEmailException("User email is invalid");
+            $this->addError(
+                new InvalidEmailException("Email is invalid")
+            );
     }
 }

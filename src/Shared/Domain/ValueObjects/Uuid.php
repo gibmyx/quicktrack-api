@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Shared\Domain\ValueObjects;
 
-use Sys\Shared\Domain\Exceptions\InvalidUuidException;
+use Shared\Domain\Exceptions\InvalidUuidException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
-class Uuid
+class Uuid extends ValueObject
 {
     public function __construct(private string $uuid)
     {
@@ -32,7 +32,9 @@ class Uuid
     private function ensureIsValidUuid(string $uuid): void
     {
         if(! RamseyUuid::isValid($uuid)){
-            throw new InvalidUuidException(sprintf("<%s> does not allow the value <%s>", static::class, $uuid));
+            $this->addError(
+                new InvalidUuidException(sprintf("<%s> does not allow the value <%s>", static::class, $uuid))
+            );
         }
     }
 }

@@ -9,7 +9,7 @@ use Shared\Domain\ValueObjects\StringValueObject;
 final class CarModel extends StringValueObject
 {
     protected $exceptionMessage = "The car model can't be empty";
-    protected $exceptionCode = 401;
+    protected $exceptionCode = 400;
 
     public function __construct(string $value)
     {

@@ -7,7 +7,7 @@ namespace Shared\Domain\ValueObjects;
 use Shared\Domain\Exceptions\EmptyArgumentException;
 use Shared\Domain\Exceptions\InvalidArgumentException;
 
-class FloatValueObject
+class FloatValueObject extends ValueObject
 {
     public function __construct(private float $value)
     {
@@ -26,12 +26,16 @@ class FloatValueObject
     public function onlyPositive(float $value): void
     {
         if (0.00 > $value)
-            throw new InvalidArgumentException($this->exceptionMessage, $this->exceptionCode);
+            $this->addError(
+                new InvalidArgumentException($this->exceptionMessage, $this->exceptionCode)
+            );
     }
 
     protected function notEmpty(float $value): void
     {
         if (empty($value))
-            throw new EmptyArgumentException($this->exceptionMessage, $this->exceptionCode);
+            $this->addError(
+                new EmptyArgumentException($this->exceptionMessage, $this->exceptionCode)
+            );
     }
 }
