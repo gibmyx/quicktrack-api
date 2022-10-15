@@ -31,56 +31,6 @@ final class EmailHistoryCreatorTest extends TestCase
         $this->assertNull($response);
     }
 
-    /**
-     * @test
-     */
-    public function itShouldThrowEmptyEmailException()
-    {
-        $this->expectException(EmptyArgumentException::class);
-
-        EmailHistoryRequestMother::withEmptyEmail();
-    }
-
-    /**
-     * @test
-     */
-    public function itShouldThrowEmptyMessageException()
-    {
-        $this->expectException(EmptyArgumentException::class);
-
-        EmailHistoryRequestMother::withEmptyMessage();
-    }
-
-    /**
-     * @test
-     */
-    public function itShouldThrowEmptyNameException()
-    {
-        $this->expectException(EmptyArgumentException::class);
-
-        EmailHistoryRequestMother::withEmptyName();
-    }
-
-    /**
-     * @test
-     */
-    public function itShouldThrowEmptyPhoneException()
-    {
-        $this->expectException(EmptyArgumentException::class);
-
-        EmailHistoryRequestMother::withEmptyPhone();
-    }
-
-    /**
-     * @test
-     */
-    public function itShouldThrowInvalidEmailException()
-    {
-        $this->expectException(InvalidEmailException::class);
-
-        EmailHistoryRequestMother::withEmailInvalid();
-    }
-
     private function shouldSave(MockObject $repository, EmailHistory $emailHistory): void
     {
         $repository->method('create')
