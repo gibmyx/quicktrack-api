@@ -30,7 +30,7 @@ final class AuthLoginTest extends TestCase
         $userRepository = $this->createMock(UserRepository::class);
         $repository = $this->createMock(AuthRepository::class);
         $this->shouldFind($userRepository, $user);
-        $this->shouldValidatePassword($userRepository, $user, new UserPassword('password'));
+        $this->shouldValidatePassword($userRepository, $user, UserPasswordMother::create('password'));
         $this->shouldGenerateAuthToken($repository, $user);
 
         $response = (new AuthLogin($repository, $userRepository))->__invoke($request);
