@@ -7,7 +7,7 @@ namespace Quicktrack\User\Infrastructure\Services;
 use Illuminate\Support\ServiceProvider as Service;
 
 use Quicktrack\User\Domain\Contract\AuthRepository;
-use Quicktrack\User\Infrastructure\Repository\JWTAuthRepository;
+use Quicktrack\User\Infrastructure\Authentication\JWTAuthRepository;
 
 use Quicktrack\User\Domain\Contract\UserRepository;
 use Quicktrack\User\Infrastructure\Persistence\EloquentUserRepository;

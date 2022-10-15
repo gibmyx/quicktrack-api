@@ -7,8 +7,6 @@ namespace Quicktrack\User\Infrastructure\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Quicktrack\User\Application\Auth\AuthLogin;
 use Quicktrack\User\Application\Auth\AuthLoginRequest;
 
@@ -24,9 +22,11 @@ final class LoginController extends Controller
         try {
             $response = ($this->authLogin)(new AuthLoginRequest($request->email, $request->password));
         } catch (\Exception $exception) {
+
             $code = $exception->getCode() === 0
                 ? JsonResponse::HTTP_BAD_REQUEST
                 : $exception->getCode();
+
             return new JsonResponse([
                 'ok' => false,
                 'content' => [],

@@ -11,7 +11,6 @@ final class LogoutController extends Controller
 {
     public function __invoke(): Response
     {
-        auth()->logout();
         return response()->noContent(200);
     }
 }

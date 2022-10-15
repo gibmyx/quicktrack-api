@@ -7,27 +7,24 @@ namespace Quicktrack\User\Application\Auth;
 use Quicktrack\User\Domain\Contract\AuthRepository;
 use Quicktrack\User\Domain\Contract\UserRepository;
 use Quicktrack\User\Domain\Services\UserFinder;
-use Quicktrack\User\Domain\Services\ValidatePassword;
 use Quicktrack\User\Domain\ValueObjects\UserEmail;
-use Quicktrack\User\Domain\ValueObjects\UserPassword;
+use Quicktrack\User\Domain\ValueObjects\UserToken;
 
-final class AuthLogin
+final class RefreshAuth
 {
     private UserFinder $finder;
-    private ValidatePassword $validatePassword;
 
     public function __construct(
         private AuthRepository $repository,
         private UserRepository $userRepository
     ) {
         $this->finder = new UserFinder($userRepository);
-        $this->validatePassword = new ValidatePassword($userRepository);
     }
 
-    public function __invoke(AuthLoginRequest $request): array
+    public function __invoke(RefreshAuthRequest $request): array
     {
-        $user = ($this->finder)(new UserEmail($request->email()));
-        ($this->validatePassword)($user, new UserPassword($request->password()));
+        $payload = $this->repository->decodeToken(new UserToken($request->token()));
+        $user = ($this->finder)(new UserEmail($payload['data']->email));
         return $this->repository->generateAuthToken($user);
     }
 }
