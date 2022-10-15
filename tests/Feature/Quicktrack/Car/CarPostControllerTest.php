@@ -19,5 +19,28 @@ class CarPostControllerTest extends TestCase
         $response = $this->postJson('/api/car', $car->toArray());
 
         $response->assertStatus(200);
+        $response->assertJson([
+            'ok' => true,
+            'content' => [],
+            'errors' => []
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function errorsArrayShouldHaveInvalidArgumentException()
+    {
+        $car = CarMother::withKilometer(-40.5);
+        $response = $this->postJson('/api/car', $car->toArray());
+
+        $response->assertStatus(400);
+        $response->assertJson([
+            'ok' => false,
+            'content' => [],
+            'errors' => [
+                "The car kilometer can't be negative"
+            ]
+        ]);
     }
 }

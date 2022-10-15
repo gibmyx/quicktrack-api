@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Shared\Domain\ValueObjects;
 
 use DateTimeImmutable;
+use Error;
+use Shared\Domain\Errors;
 use Shared\Domain\Exceptions\InvalidDateException;
 
-class DateTimeValueObject
+class DateTimeValueObject extends ValueObject
 {
     public function __construct(
         private string $date = 'now', 
@@ -22,7 +24,9 @@ class DateTimeValueObject
         $dateTimeImmutable = \DateTimeImmutable::createFromFormat($format, $dateTime);
 
         if (false == $dateTimeImmutable)
-            throw new InvalidDateException("The given date time is invalid", 400);
+            Errors::getInstance()->addError(
+                new InvalidDateException("The given date time is invalid", 400)
+            );
 
         return new static(
             $dateTimeImmutable->format($format),
@@ -32,28 +36,26 @@ class DateTimeValueObject
 
     private function setDate(string $date, ?string $format): string
     {
-        try {
-            $date = $date != 'now'
-                ? (new DateTimeImmutable($date))->format('Y-m-d H:i:s')
-                : date('Y-m-d H:i:s');
+        $date = $date != 'now'
+            ? (new DateTimeImmutable($date))->format('Y-m-d H:i:s')
+            : date('Y-m-d H:i:s');
 
-            $explodedDate = explode('-', $date);
+        $explodedDate = explode('-', $date);
 
-            if (! checkdate(
-                (int)$explodedDate[1],
-                (int)$explodedDate[2],
-                (int)$explodedDate[0]
-            ))
-                throw new InvalidDateException("The given date time {$date} is invalid", 400);
+        if (! checkdate(
+            (int)$explodedDate[1],
+            (int)$explodedDate[2],
+            (int)$explodedDate[0]
+        ))
+            $this->addError(
+                new InvalidDateException("The given date time {$date} is invalid", 400)
+            );
 
 
-            if ($format)
-                return (new DateTimeImmutable($date))->format($format);
-            
-            return $date; 
-        } catch (\Exception $e) {
-            throw new InvalidDateException("The given date time {$date} is invalid", 400);
-        }
+        if ($format)
+            return (new DateTimeImmutable($date))->format($format);
+        
+        return $date; 
     }
 
     public static function now(): self

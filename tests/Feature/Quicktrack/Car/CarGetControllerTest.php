@@ -26,7 +26,7 @@ class CarGetControllerTest extends TestCase
             'content' => [
                 'car' => $car->toArray()
             ],
-            'error' => []
+            'errors' => []
         ]);
     }
 }

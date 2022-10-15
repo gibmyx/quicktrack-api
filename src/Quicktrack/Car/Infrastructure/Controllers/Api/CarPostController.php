@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Quicktrack\Car\Application\Create\CarCreator;
 use Quicktrack\Car\Application\Create\CarCreatorRequest;
+use Shared\Domain\Errors;
 
 final class CarPostController extends Controller
 {
@@ -35,6 +36,24 @@ final class CarPostController extends Controller
             $request->input('status'),
         ));
 
-        return new JsonResponse([], JsonResponse::HTTP_OK);
+        if (Errors::getInstance()->errors()) {
+            return new JsonResponse(
+                [
+                    'ok' => false,
+                    'content' => [],
+                    'errors' => Errors::getInstance()->errorsMessage()
+                ], 
+                JsonResponse::HTTP_BAD_REQUEST
+            );
+        }
+
+        return new JsonResponse(
+            [
+                'ok' => true,
+                'content' => [],
+                'errors' => []
+            ], 
+            JsonResponse::HTTP_OK
+        );
     }
 }
