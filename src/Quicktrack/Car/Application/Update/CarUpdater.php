@@ -17,6 +17,7 @@ use Quicktrack\Car\Domain\ValueObjects\CarPrice;
 use Quicktrack\Car\Domain\ValueObjects\CarStatus;
 use Quicktrack\Car\Domain\ValueObjects\CarType;
 use Quicktrack\Car\Domain\ValueObjects\CarYear;
+use Shared\Domain\Errors;
 
 final class CarUpdater
 {
@@ -35,17 +36,19 @@ final class CarUpdater
     {
         $car = ($this->finder)(new CarId($request->id()));
 
-        $car->changeBrand(new CarBrand($request->brand()));
-        $car->changeModel(new CarModel($request->model()));
-        $car->changeColor(new CarColor($request->color()));
-        $car->changeFuel(new CarFuel($request->fuel()));
-        $car->changeGearbox(new CarGearbox($request->gearbox()));
-        $car->changeKilometer(new CarKilometer($request->kilometer()));
-        $car->changePrice(new CarPrice($request->price()));
-        $car->changeType(new CarType($request->type()));
-        $car->changeYear(new CarYear($request->year()));
-        $car->changeStatus(new CarStatus($request->status()));
-
-        $this->repository->update($car);
+        if (! Errors::getInstance()->hasErrors()) {
+            $car->changeBrand(new CarBrand($request->brand()));
+            $car->changeModel(new CarModel($request->model()));
+            $car->changeColor(new CarColor($request->color()));
+            $car->changeFuel(new CarFuel($request->fuel()));
+            $car->changeGearbox(new CarGearbox($request->gearbox()));
+            $car->changeKilometer(new CarKilometer($request->kilometer()));
+            $car->changePrice(new CarPrice($request->price()));
+            $car->changeType(new CarType($request->type()));
+            $car->changeYear(new CarYear($request->year()));
+            $car->changeStatus(new CarStatus($request->status()));
+    
+            $this->repository->update($car);
+        }
     }
 }

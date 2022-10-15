@@ -10,12 +10,13 @@ use Quicktrack\Car\Application\Find\CarFinderRequest;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
 use Shared\Domain\Errors;
+use Tests\Shared\Infrastructure\Laravel\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
-use Tests\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarIdMother;
 use Tests\Unit\Shared\Domain\UuidMother;
 
-final class CarFinderTest extends TestCase {
+final class CarFinderTest extends TestCase
+{
     
     /** 
      * @test

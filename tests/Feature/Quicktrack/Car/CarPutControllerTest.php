@@ -3,27 +3,27 @@
 namespace Tests\Feature\Quicktrack\Car;
 
 use Tests\Shared\Infrastructure\Laravel\TestCase;
+use Tests\Unit\Quicktrack\Car\Domain\CarBrandMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
-use Tests\Unit\Shared\Domain\UuidMother;
 
-class CarGetControllerTest extends TestCase
+class CarPutControllerTest extends TestCase
 {
     /**
      * @test
      */
-    public function itShouldFindAnExistingCar()
+    public function itShouldFindAnUpdateAnExistingCar()
     {
         $car = CarMother::random();
         $this->postJson('/api/car', $car->toArray());
 
-        $response = $this->getJson("/api/car/{$car->id()->value()}");
+        $car->changeBrand(CarBrandMother::random());
+
+        $response = $this->putJson("/api/car/{$car->id()->value()}", $car->toArray());
 
         $response->assertStatus(200);
         $response->assertJson([
             'ok' => true,
-            'content' => [
-                'car' => $car->toArray()
-            ],
+            'content' => [],
             'errors' => []
         ]);
     }
@@ -33,15 +33,15 @@ class CarGetControllerTest extends TestCase
      */
     public function errorsArrayShouldHaveDomainNotFoundException()
     {
-        $id = UuidMother::random();
-        $response = $this->getJson("/api/car/{$id}");
+        $car = CarMother::random();
+        $response = $this->putJson("/api/car/{$car->id()->value()}", $car->toArray());
 
         $response->assertStatus(400);
         $response->assertJson([
             'ok' => false,
             'content' => [],
             'errors' => [
-                "There's not any car with ID {$id}"
+                "There's not any car with ID {$car->id()->value()}"
             ]
         ]);
     }

@@ -7,7 +7,7 @@ namespace Tests\Unit\Quicktrack\Car\Application\Search;
 use Quicktrack\Car\Application\Search\CarSearcher;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
-use Tests\TestCase;
+use Tests\Shared\Infrastructure\Laravel\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 use Tests\Unit\Quicktrack\Car\Domain\CarsMother;
 
@@ -22,15 +22,16 @@ final class CarSearcherTest extends TestCase
         $car2 = CarMother::withStatus('sold');
         $car3 = CarMother::withStatus('available');
         $response = CarsMother::create($car3);
+        $propValue = 'available';
 
         $repository = $this->createMock(CarRepository::class);
         $searcher = new CarSearcher($repository);
 
-        $this->shouldSearchByPropEqualTo($repository, 'status', 'available', $car1, $car2, $car3);
+        $this->shouldSearchByPropEqualTo($repository, 'status', $propValue, $car1, $car2, $car3);
 
         $this->assertEquals(
             $response,
-            ($searcher)(CarSearcherRequestMother::byStatus('available'))
+            ($searcher)(CarSearcherRequestMother::byStatus($propValue))
         );
     }
 
@@ -43,15 +44,16 @@ final class CarSearcherTest extends TestCase
         $car2 = CarMother::withStatus('sold');
         $car3 = CarMother::withStatus('sold');
         $response = CarsMother::create();
+        $propValue = 'available';
 
         $repository = $this->createMock(CarRepository::class);
         $searcher = new CarSearcher($repository);
 
-        $this->shouldSearchByPropEqualTo($repository, 'status', 'available', $car1, $car2, $car3);
+        $this->shouldSearchByPropEqualTo($repository, 'status', $propValue, $car1, $car2, $car3);
 
         $this->assertEquals(
             $response,
-            ($searcher)(CarSearcherRequestMother::byStatus('available'))
+            ($searcher)(CarSearcherRequestMother::byStatus($propValue))
         );
     }
 

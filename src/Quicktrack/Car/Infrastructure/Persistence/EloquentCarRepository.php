@@ -19,7 +19,11 @@ final class EloquentCarRepository implements CarRepository
 
     public function update(Car $car): void
     {
-        ModelsCar::update($car->toArray());
+        $car = ModelsCar::find($car->id()->value());
+
+        if ($car) {
+            $car->update($car->toArray());
+        }
     }
 
     public function find(CarId $carId): ?Car

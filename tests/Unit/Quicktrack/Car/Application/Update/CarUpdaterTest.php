@@ -6,16 +6,13 @@ namespace Tests\Unit\Quicktrack\Car\Application\Update;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use Quicktrack\Car\Application\Update\CarUpdater;
-use Quicktrack\Car\Application\Update\CarUpdaterRequest;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
-use Shared\Domain\Exceptions\DomainNotExistsException;
+use Tests\Shared\Infrastructure\Laravel\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
-use Tests\TestCase;
-use Tests\Unit\Quicktrack\Car\Domain\CarIdMother;
-use Tests\Unit\Shared\Domain\UuidMother;
 
-final class CarUpdaterTest extends TestCase {
+final class CarUpdaterTest extends TestCase
+{
     /**
      * @test
      */

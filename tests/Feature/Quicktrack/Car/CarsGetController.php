@@ -6,12 +6,12 @@ use Tests\Shared\Infrastructure\Laravel\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 use Tests\Unit\Shared\Domain\UuidMother;
 
-class CarGetControllerTest extends TestCase
+class CarsGetControllerTest extends TestCase
 {
     /**
      * @test
      */
-    public function itShouldFindAnExistingCar()
+    public function itShouldSearchAndFindAnExistingCar()
     {
         $car = CarMother::random();
         $this->postJson('/api/car', $car->toArray());

@@ -9,10 +9,11 @@ use Quicktrack\Car\Application\Create\CarCreator;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
 use Shared\Domain\Errors;
+use Tests\Shared\Infrastructure\Laravel\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
-use Tests\TestCase;
 
-final class CarCreatorTest extends TestCase {
+final class CarCreatorTest extends TestCase
+{
     
     /** 
      * @test
