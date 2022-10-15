@@ -117,4 +117,22 @@ final class CarMother
             CarStatusMother::create($status)
         );
     }
+
+    public static function withKilometer(float $kilometer): Car
+    {
+        return self::create(
+            CarIdMother::random(),
+            CarCodeMother::random(),
+            CarBrandMother::random(),
+            CarModelMother::random(),
+            CarColorMother::random(),
+            CarFuelMother::random(),
+            CarGearboxMother::random(),
+            CarKilometerMother::create($kilometer),
+            CarPriceMother::random(),
+            CarTypeMother::random(),
+            CarYearMother::random(),
+            CarStatusMother::random()
+        );
+    }
 }

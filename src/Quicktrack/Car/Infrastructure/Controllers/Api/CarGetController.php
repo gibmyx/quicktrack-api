@@ -30,7 +30,7 @@ final class CarGetController extends Controller
                 'content' => [
                     'car' => $car->toArray()
                 ],
-                'error' => []
+                'errors' => []
             ], 
             JsonResponse::HTTP_OK
         );

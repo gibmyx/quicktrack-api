@@ -18,6 +18,7 @@ use Quicktrack\Car\Domain\ValueObjects\CarStatus;
 use Quicktrack\Car\Domain\ValueObjects\CarType;
 use Quicktrack\Car\Domain\ValueObjects\CarYear;
 use Quicktrack\Car\Domain\Contract\CarRepository;
+use Shared\Domain\Errors;
 
 final class CarCreator
 {
@@ -42,10 +43,13 @@ final class CarCreator
             new CarKilometer($request->kilometer()),
             new CarPrice($request->price()),
             new CarType($request->type()),
-            //new CarYear($request->year()),
             CarYear::createFromFormat('Y', $request->year()),
             new CarStatus($request->status())
         );
+
+        if (Errors::getInstance()->errors()) {
+            return;
+        }
 
         $this->repository->create($car);
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Shared\Domain;
 
+use Exception;
+
 final class Errors
 {
     private static $instance;
@@ -32,5 +34,13 @@ final class Errors
     public function errors(): array
     {
         return $this->errors;
+    }
+
+    public function errorsMessage(): array
+    {
+        return array_map(
+            fn(Exception $exception) => $exception->getMessage(),
+            $this->errors
+        );
     }
 }
