@@ -36,14 +36,14 @@ final class CarPostController extends Controller
             $request->input('status'),
         ));
 
-        if (Errors::getInstance()->errors()) {
+        if (Errors::getInstance()->hasErrors()) {
             return new JsonResponse(
                 [
                     'ok' => false,
                     'content' => [],
                     'errors' => Errors::getInstance()->errorsMessage()
                 ], 
-                JsonResponse::HTTP_BAD_REQUEST
+                Errors::getInstance()->errorsCode()
             );
         }
 

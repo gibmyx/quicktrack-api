@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Quicktrack\Car\Infrastructure\Controllers\Api;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Quicktrack\Car\Application\Find\CarFinder;
 use Quicktrack\Car\Application\Find\CarFinderRequest;
+use Shared\Domain\Errors;
 
 final class CarGetController extends Controller
 {
@@ -23,6 +23,17 @@ final class CarGetController extends Controller
         $car = ($this->finder)(new CarFinderRequest(
             $id
         ));
+
+        if (Errors::getInstance()->hasErrors()) {
+            return new JsonResponse(
+                [
+                    'ok' => false,
+                    'content' => [],
+                    'errors' => Errors::getInstance()->errorsMessage()
+                ], 
+                JsonResponse::HTTP_BAD_REQUEST
+            );
+        }
 
         return new JsonResponse(
             [

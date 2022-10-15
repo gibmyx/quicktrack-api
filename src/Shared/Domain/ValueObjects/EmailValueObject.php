@@ -19,7 +19,7 @@ class EmailValueObject extends StringValueObject
     {
         if (! filter_var($value, FILTER_VALIDATE_EMAIL))
             $this->addError(
-                new InvalidEmailException("Email is invalid")
+                new InvalidEmailException("Email is invalid", 400)
             );
     }
 }

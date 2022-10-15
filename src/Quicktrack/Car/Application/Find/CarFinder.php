@@ -6,6 +6,7 @@ namespace Quicktrack\Car\Application\Find;
 
 use Quicktrack\Car\Domain\ValueObjects\CarId;
 use Quicktrack\Car\Domain\Contract\CarRepository;
+use Quicktrack\Car\Domain\Entity\Car;
 use Quicktrack\Car\Domain\Services\CarFinder as ServicesCarFinder;
 
 final class CarFinder
@@ -21,7 +22,7 @@ final class CarFinder
 
     public function __invoke(
         CarFinderRequest $request
-    )
+    ): ?Car
     {
         return ($this->finder)(new CarId($request->id()));
     }

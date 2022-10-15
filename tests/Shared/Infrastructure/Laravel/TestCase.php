@@ -1,12 +1,13 @@
 <?php
 
-namespace Tests;
+namespace Tests\Shared\Infrastructure\Laravel;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Shared\Domain\Errors;
+use Tests\CreatesApplication;
+use Tests\TestCase as LaravelTestCase;
 
-abstract class TestCase extends BaseTestCase
+abstract class TestCase extends LaravelTestCase
 {
     use CreatesApplication;
     use DatabaseTransactions;

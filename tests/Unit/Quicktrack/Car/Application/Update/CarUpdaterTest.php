@@ -33,25 +33,6 @@ final class CarUpdaterTest extends TestCase {
         $this->assertNull($response);
     }
 
-    /**
-     * @test
-     */
-    public function itShouldThrowDomainNotExistException()
-    {
-        $this->expectException(DomainNotExistsException::class);
-
-        $car = CarMother::random();
-        $request = CarUpdaterRequestMother::withId(UuidMother::random());
-
-        $repository = $this->createMock(CarRepository::class);
-        $this->shouldNotFind($repository, $request);
-        $this->shouldSave($repository, $car);
-
-        $response = (new CarUpdater($repository))->__invoke($request);
-
-        $this->assertNull($response);
-    }
-
     private function shouldSave(MockObject $repository, Car $car): void
     {
         $repository->method('update')
@@ -63,12 +44,5 @@ final class CarUpdaterTest extends TestCase {
         $repository->method('find')
             ->with($this->equalTo($car->id()))
             ->willReturn($car);
-    }
-
-    private function shouldNotFind(MockObject $repository, CarUpdaterRequest $request): void
-    {
-        $repository->method('find')
-            ->with($this->equalTo(CarIdMother::create($request->id())))
-            ->willReturn(null);
     }
 }

@@ -9,7 +9,7 @@ use Quicktrack\Car\Application\Find\CarFinder;
 use Quicktrack\Car\Application\Find\CarFinderRequest;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
-use Shared\Domain\Exceptions\DomainNotExistsException;
+use Shared\Domain\Errors;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 use Tests\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarIdMother;
@@ -38,27 +38,23 @@ final class CarFinderTest extends TestCase {
      */
     public function itShouldThrowDomainNotExistException()
     {
-        $this->expectException(DomainNotExistsException::class);
-
         $car = CarMother::random();
-        $request = CarFinderRequestMother::withId(UuidMother::random());
+        $id = UuidMother::random();
+        $request = CarFinderRequestMother::withId($id);
 
         $repository = $this->createMock(CarRepository::class);
         $this->shouldNotFind($repository, $request);
 
         (new CarFinder($repository))->__invoke($request);
+
+        $this->assertSame(
+            [
+                "There's not any car with ID {$id}"
+            ],
+            Errors::getInstance()->errorsMessage()
+        );
     }
 
-    /** 
-     * @test
-    */
-    /*public function itShouldThrowInvalidArgumentException()
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        CarCreatorRequestMother::withNegativeKilometer();
-    }
-*/
     private function shouldFind(MockObject $repository, Car $car): void
     {
         $repository->method('find')

@@ -8,6 +8,9 @@ use Exception;
 
 final class Errors
 {
+    const BAD_REQUEST = 400;
+    const UNAUTHORIZED = 401;
+
     private static $instance;
 
     private array $errors;
@@ -42,5 +45,29 @@ final class Errors
             fn(Exception $exception) => $exception->getMessage(),
             $this->errors
         );
+    }
+
+    public function errorsCode(): int
+    {
+        return array_reduce(
+            $this->errors,
+            function (?int $acc, Exception $exception) {
+                if ($exception->getCode() === self::UNAUTHORIZED)
+                    $acc = $exception->getCode();
+
+                return $acc;
+            },
+            self::BAD_REQUEST
+        );
+    }
+
+    public function hasErrors(): bool
+    {
+        return ! empty($this->errors);
+    }
+
+    public function clear(): void
+    {
+        $this->errors = [];
     }
 }

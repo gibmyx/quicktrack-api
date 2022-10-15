@@ -135,4 +135,22 @@ final class CarMother
             CarStatusMother::random()
         );
     }
+
+    public static function withIdAndKilometer(string $id, float $kilometer): Car
+    {
+        return self::create(
+            CarIdMother::create($id),
+            CarCodeMother::random(),
+            CarBrandMother::random(),
+            CarModelMother::random(),
+            CarColorMother::random(),
+            CarFuelMother::random(),
+            CarGearboxMother::random(),
+            CarKilometerMother::create($kilometer),
+            CarPriceMother::random(),
+            CarTypeMother::random(),
+            CarYearMother::random(),
+            CarStatusMother::random()
+        );
+    }
 }

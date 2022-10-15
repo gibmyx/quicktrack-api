@@ -47,10 +47,8 @@ final class CarCreator
             new CarStatus($request->status())
         );
 
-        if (Errors::getInstance()->errors()) {
-            return;
+        if (! Errors::getInstance()->hasErrors()) {
+            $this->repository->create($car);
         }
-
-        $this->repository->create($car);
     }
 }

@@ -33,7 +33,7 @@ class Uuid extends ValueObject
     {
         if(! RamseyUuid::isValid($uuid)){
             $this->addError(
-                new InvalidUuidException(sprintf("<%s> does not allow the value <%s>", static::class, $uuid))
+                new InvalidUuidException('Invalid uuid', 400)
             );
         }
     }

@@ -2,14 +2,11 @@
 
 namespace Tests\Feature\Quicktrack\Car;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
+use Tests\Shared\Infrastructure\Laravel\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 
 class CarPostControllerTest extends TestCase
 {
-    use DatabaseTransactions;
-
     /**
      * @test
      */
@@ -39,6 +36,25 @@ class CarPostControllerTest extends TestCase
             'ok' => false,
             'content' => [],
             'errors' => [
+                "The car kilometer can't be negative"
+            ]
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function errorsArrayShouldHaveInvalidArgumentAndEmptyArgumentExceptions()
+    {
+        $car = CarMother::withIdAndKilometer('Wrong uuid', -40.5);
+        $response = $this->postJson('/api/car', $car->toArray());
+
+        $response->assertStatus(400);
+        $response->assertJson([
+            'ok' => false,
+            'content' => [],
+            'errors' => [
+                "Invalid uuid",
                 "The car kilometer can't be negative"
             ]
         ]);

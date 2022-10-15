@@ -2,14 +2,11 @@
 
 namespace Tests\Feature\Quicktrack\Car;
 
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
+use Tests\Shared\Infrastructure\Laravel\TestCase;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 
 class CarGetControllerTest extends TestCase
 {
-    use DatabaseTransactions;
-
     /**
      * @test
      */
@@ -27,6 +24,25 @@ class CarGetControllerTest extends TestCase
                 'car' => $car->toArray()
             ],
             'errors' => []
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function errorsArrayShouldHaveDomainNotFoundException()
+    {
+        $id = 'wrong-id';
+        $response = $this->getJson("/api/car/{$id}");
+
+        $response->assertStatus(400);
+        $response->assertJson([
+            'ok' => false,
+            'content' => [],
+            'errors' => [
+                "Invalid uuid",
+                "There's not any car with ID {$id}"
+            ]
         ]);
     }
 }

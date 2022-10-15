@@ -9,8 +9,6 @@ use Quicktrack\Car\Application\Create\CarCreator;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
 use Shared\Domain\Errors;
-use Shared\Domain\Exceptions\EmptyArgumentException;
-use Shared\Domain\Exceptions\InvalidArgumentException;
 use Tests\Unit\Quicktrack\Car\Domain\CarMother;
 use Tests\TestCase;
 
@@ -35,23 +33,36 @@ final class CarCreatorTest extends TestCase {
     /** 
      * @test
     */
-    /* public function itShouldThrowEmptyArgumentException()
+    public function itShouldHaveCarModelEmptyErrorMessage()
     {
         $request = CarCreatorRequestMother::withEmptyModel();
         $car = CarMother::fromRequest($request);
 
-        $this->assertTrue(true);
-        //Errors::getInstance()->errors();
+        $this->assertSame(
+            [
+                "The car model can't be empty",
+                "The car model can't be empty"
+            ],
+            Errors::getInstance()->errorsMessage()
+        );
     }
 
     /** 
      * @test
     */
-    /*public function itShouldThrowInvalidArgumentException()
+    public function itShouldThrowInvalidArgumentException()
     {
         $request = CarCreatorRequestMother::withNegativeKilometer();
         $car = CarMother::fromRequest($request);
-    } */
+
+        $this->assertSame(
+            [
+                "The car kilometer can't be negative",
+                "The car kilometer can't be negative"
+            ],
+            Errors::getInstance()->errorsMessage()
+        );
+    }
 
     
 
