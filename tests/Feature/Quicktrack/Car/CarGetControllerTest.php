@@ -14,9 +14,9 @@ class CarGetControllerTest extends TestCase
     public function itShouldFindAnExistingCar()
     {
         $car = CarMother::random();
-        $this->postJson('/api/car', $car->toArray());
+        $this->postJson('/api/car', $car->toArray(), ['x-token' => $this->token]);
 
-        $response = $this->getJson("/api/car/{$car->id()->value()}");
+        $response = $this->getJson("/api/car/{$car->id()->value()}", ['x-token' => $this->token]);
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -34,7 +34,7 @@ class CarGetControllerTest extends TestCase
     public function errorsArrayShouldHaveDomainNotFoundException()
     {
         $id = UuidMother::random();
-        $response = $this->getJson("/api/car/{$id}");
+        $response = $this->getJson("/api/car/{$id}", ['x-token' => $this->token]);
 
         $response->assertStatus(400);
         $response->assertJson([

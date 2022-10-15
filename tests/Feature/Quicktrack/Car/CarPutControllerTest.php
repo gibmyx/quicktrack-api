@@ -14,11 +14,11 @@ class CarPutControllerTest extends TestCase
     public function itShouldFindAnUpdateAnExistingCar()
     {
         $car = CarMother::random();
-        $this->postJson('/api/car', $car->toArray());
+        $this->postJson('/api/car', $car->toArray(), ['x-token' => $this->token]);
 
         $car->changeBrand(CarBrandMother::random());
 
-        $response = $this->putJson("/api/car/{$car->id()->value()}", $car->toArray());
+        $response = $this->putJson("/api/car/{$car->id()->value()}", $car->toArray(), ['x-token' => $this->token]);
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -34,7 +34,7 @@ class CarPutControllerTest extends TestCase
     public function errorsArrayShouldHaveDomainNotFoundException()
     {
         $car = CarMother::random();
-        $response = $this->putJson("/api/car/{$car->id()->value()}", $car->toArray());
+        $response = $this->putJson("/api/car/{$car->id()->value()}", $car->toArray(), ['x-token' => $this->token]);
 
         $response->assertStatus(400);
         $response->assertJson([

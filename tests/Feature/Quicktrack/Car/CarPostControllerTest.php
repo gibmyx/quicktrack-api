@@ -13,7 +13,7 @@ class CarPostControllerTest extends TestCase
     public function itShouldCreateAndSaveAValidCar()
     {
         $car = CarMother::random();
-        $response = $this->postJson('/api/car', $car->toArray());
+        $response = $this->postJson('/api/car', $car->toArray(), ['x-token' => $this->token]);
 
         $response->assertStatus(200);
         $response->assertJson([
@@ -29,7 +29,7 @@ class CarPostControllerTest extends TestCase
     public function errorsArrayShouldHaveInvalidArgumentException()
     {
         $car = CarMother::withKilometer(-40.5);
-        $response = $this->postJson('/api/car', $car->toArray());
+        $response = $this->postJson('/api/car', $car->toArray(), ['x-token' => $this->token]);
 
         $response->assertStatus(400);
         $response->assertJson([
@@ -47,7 +47,7 @@ class CarPostControllerTest extends TestCase
     public function errorsArrayShouldHaveInvalidArgumentAndEmptyArgumentExceptions()
     {
         $car = CarMother::withIdAndKilometer('Wrong uuid', -40.5);
-        $response = $this->postJson('/api/car', $car->toArray());
+        $response = $this->postJson('/api/car', $car->toArray(), ['x-token' => $this->token]);
 
         $response->assertStatus(400);
         $response->assertJson([
