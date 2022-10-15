@@ -7,9 +7,13 @@ namespace Tests\Unit\Quicktrack\User\Application\Auth;
 use Monolog\Test\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Quicktrack\User\Application\Auth\AuthLogin;
+use Quicktrack\User\Application\Auth\AuthLoginRequest;
 use Quicktrack\User\Domain\Contract\AuthRepository;
 use Quicktrack\User\Domain\Entity\User;
 use Quicktrack\User\Domain\ValueObjects\UserPassword;
+use Shared\Domain\Exceptions\DomainNotExistsException;
+use Shared\Domain\Exceptions\InvalidArgumentException;
+use Tests\Unit\Quicktrack\User\Domain\UserEmailMother;
 use Tests\Unit\Quicktrack\User\Domain\UserMother;
 use Quicktrack\User\Domain\Contract\UserRepository;
 
@@ -30,6 +34,39 @@ final class AuthLoginTest extends TestCase
 
         $response = (new AuthLogin($repository, $userRepository))->__invoke($request);
         $this->assertSame($this->getResponse($user), $response);
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldDoNotFinderEmail()
+    {
+        $this->expectException(DomainNotExistsException::class);
+
+        $user = UserMother::random();
+        $request = AuthLoginRequestMother::loginRequest($user->email()->value(), 'password');
+        $userRepository = $this->createMock(UserRepository::class);
+        $repository = $this->createMock(AuthRepository::class);
+        $this->shouldNotFind($userRepository, $request);
+
+        (new AuthLogin($repository, $userRepository))->__invoke($request);
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldDoNotMatchCredentials()
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $user = UserMother::random();
+        $request = AuthLoginRequestMother::loginRequest($user->email()->value(), 'password');
+        $userRepository = $this->createMock(UserRepository::class);
+        $repository = $this->createMock(AuthRepository::class);
+        $this->shouldFind($userRepository, $user);
+        $this->shouldValidatePassword($userRepository, $user, new UserPassword('password'), false);
+
+        (new AuthLogin($repository, $userRepository))->__invoke($request);
     }
 
     private function shouldFind(
@@ -59,6 +96,13 @@ final class AuthLoginTest extends TestCase
         $repository->method('generateAuthToken')
             ->with($user)
             ->willReturn($this->getResponse($user));
+    }
+
+    private function shouldNotFind(MockObject $repository, AuthLoginRequest $request): void
+    {
+        $repository->method('find')
+            ->with($this->equalTo(UserEmailMother::create($request->email())))
+            ->willReturn(null);
     }
 
     private function getResponse(User $user): array
