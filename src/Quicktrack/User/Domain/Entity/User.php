@@ -29,6 +29,18 @@ final class User
         );
     }
 
+    public static function create(
+        UserId $id,
+        UserName $name,
+        UserEmail $email
+    ): self {
+        return new self(
+            $id,
+            $name,
+            $email
+        );
+    }
+
     public function id(): UserId
     {
         return $this->id;

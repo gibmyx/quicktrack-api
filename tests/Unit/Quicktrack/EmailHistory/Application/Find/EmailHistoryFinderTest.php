@@ -11,6 +11,7 @@ use Quicktrack\EmailHistory\Domain\Contract\EmailHistoryRepository;
 use Quicktrack\EmailHistory\Domain\Entity\EmailHistory;
 use Shared\Domain\Exceptions\DomainNotExistsException;
 use Tests\TestCase;
+use Tests\Unit\Quicktrack\EmailHistory\Domain\EmailHistoryIdMother;
 use Tests\Unit\Quicktrack\EmailHistory\Domain\EmailHistoryMother;
 use Tests\Unit\Shared\Domain\UuidMother;
 
@@ -57,9 +58,11 @@ final class EmailHistoryFinderTest extends TestCase
     }
 
     private function shouldNotFind(
-        EmailHistoryRepository $repository,
+        MockObject $repository,
         EmailHistoryFinderRequest $request
     ): void {
-
+        $repository->method('find')
+            ->with($this->equalTo(EmailHistoryIdMother::create($request->id())))
+            ->willReturn(null);
     }
 }

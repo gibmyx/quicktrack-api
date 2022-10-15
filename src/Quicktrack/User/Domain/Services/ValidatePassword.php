@@ -8,9 +8,8 @@ namespace Quicktrack\User\Domain\Services;
 
 use Quicktrack\User\Domain\Contract\UserRepository;
 use Quicktrack\User\Domain\Entity\User;
-use Quicktrack\User\Domain\ValueObjects\UserEmail;
 use Quicktrack\User\Domain\ValueObjects\UserPassword;
-use Shared\Domain\Exceptions\DomainNotExistsException;
+use Shared\Domain\Exceptions\InvalidArgumentException;
 
 final class ValidatePassword
 {
@@ -21,12 +20,12 @@ final class ValidatePassword
 
     public function __invoke(
         User $user,
-        UserPassword $passwor
+        UserPassword $password
     ) {
-        $isValid = $this->repository->validatePasssword($user, $passwor);
+        $isValid = $this->repository->validatePasssword($user, $password);
 
         if (false === $isValid) {
-            throw new DomainNotExistsException("The credentials do not match", 400);
+            throw new InvalidArgumentException("The credentials do not match", 400);
         }
     }
 }
