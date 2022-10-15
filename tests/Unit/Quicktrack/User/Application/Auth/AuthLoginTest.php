@@ -16,6 +16,7 @@ use Shared\Domain\Exceptions\InvalidArgumentException;
 use Tests\Unit\Quicktrack\User\Domain\UserEmailMother;
 use Tests\Unit\Quicktrack\User\Domain\UserMother;
 use Quicktrack\User\Domain\Contract\UserRepository;
+use Tests\Unit\Quicktrack\User\Domain\UserPasswordMother;
 
 final class AuthLoginTest extends TestCase
 {
@@ -64,7 +65,7 @@ final class AuthLoginTest extends TestCase
         $userRepository = $this->createMock(UserRepository::class);
         $repository = $this->createMock(AuthRepository::class);
         $this->shouldFind($userRepository, $user);
-        $this->shouldValidatePassword($userRepository, $user, new UserPassword('password'), false);
+        $this->shouldValidatePassword($userRepository, $user, UserPasswordMother::create('password'), false);
 
         (new AuthLogin($repository, $userRepository))->__invoke($request);
     }
