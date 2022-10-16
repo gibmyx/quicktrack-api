@@ -28,7 +28,7 @@ final class EmailHistoryPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function itShouldCreateEmailHistoryWithEmailEmpty()
+    public function itShouldReturnErrorMessageForEmailHistoryWithEmailEmpty()
     {
         $emailHistory = EmailHistoryMother::withEmailEmpty();
         $response = $this->postJson('/api/email-history', $emailHistory->toArray());
@@ -44,7 +44,7 @@ final class EmailHistoryPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function itShouldCreateEmailHistoryWithPhoneEmpty()
+    public function itShouldReturnErrorMessageForEmailHistoryWithPhoneEmpty()
     {
         $emailHistory = EmailHistoryMother::withPhoneEmpty();
         $response = $this->postJson('/api/email-history', $emailHistory->toArray());
@@ -60,7 +60,7 @@ final class EmailHistoryPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function itShouldCreateEmailHistoryWithNameEmpty()
+    public function itShouldReturnErrorMessageForEmailHistoryWithNameEmpty()
     {
         $emailHistory = EmailHistoryMother::withNameEmpty();
         $response = $this->postJson('/api/email-history', $emailHistory->toArray());
@@ -76,7 +76,7 @@ final class EmailHistoryPostControllerTest extends TestCase
     /**
      * @test
      */
-    public function itShouldCreateEmailHistoryWithMessageEmpty()
+    public function itShouldReturnErrorMessageForEmailHistoryWithMessageEmpty()
     {
         $emailHistory = EmailHistoryMother::withMessageEmpty();
         $response = $this->postJson('/api/email-history', $emailHistory->toArray());
