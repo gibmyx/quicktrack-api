@@ -82,6 +82,9 @@ final class JWTAuthRepository implements AuthRepository
             return [];
         }
 
-        return (array)JWT::decode($token->value(), new Key($this->key, $this->jwtAlgo));
+        $token = (array)JWT::decode($token->value(), new Key($this->key, $this->jwtAlgo));
+        $token['data'] = (array)$token['data'];
+
+        return $token;
     }
 }

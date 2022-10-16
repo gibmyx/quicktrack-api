@@ -24,7 +24,7 @@ final class RefreshAuth
     public function __invoke(RefreshAuthRequest $request): array
     {
         $payload = $this->repository->decodeToken(new UserToken($request->token()));
-        $user = ($this->finder)(new UserEmail($payload['data']->email));
+        $user = ($this->finder)(new UserEmail($payload['data']['email']));
         return $this->repository->generateAuthToken($user);
     }
 }

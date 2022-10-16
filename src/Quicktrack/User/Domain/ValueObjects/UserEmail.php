@@ -9,7 +9,7 @@ use Shared\Domain\ValueObjects\EmailValueObject;
 final class UserEmail extends EmailValueObject
 {
     protected $exceptionMessage = "The Email can't be empty";
-    protected $exceptionCode = 401;
+    protected $exceptionCode = 400;
 
     public function __construct(string $value)
     {

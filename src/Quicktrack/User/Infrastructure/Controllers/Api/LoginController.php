@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Quicktrack\User\Application\Auth\AuthLogin;
 use Quicktrack\User\Application\Auth\AuthLoginRequest;
+use Shared\Domain\Errors;
 
 final class LoginController extends Controller
 {
@@ -20,7 +21,8 @@ final class LoginController extends Controller
     public function __invoke(Request $request): JsonResponse
     {
         try {
-            $response = ($this->authLogin)(new AuthLoginRequest($request->email, $request->password));
+            $response = ($this->authLogin)(new AuthLoginRequest($request->email ?? '', $request->password ?? ''));
+            return $this->response($response);
         } catch (\Exception $exception) {
 
             $code = $exception->getCode() === 0
@@ -32,6 +34,20 @@ final class LoginController extends Controller
                 'content' => [],
                 'errors' => [$exception->getMessage()]
             ], $code);
+        }
+    }
+
+    private function response(array $response)
+    {
+        if (Errors::getInstance()->hasErrors()) {
+            return new JsonResponse(
+                [
+                    'ok' => false,
+                    'content' => [],
+                    'errors' => Errors::getInstance()->errorsMessage()
+                ],
+                Errors::getInstance()->errorsCode()
+            );
         }
 
         return new JsonResponse([

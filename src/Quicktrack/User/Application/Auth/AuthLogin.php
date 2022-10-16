@@ -10,6 +10,7 @@ use Quicktrack\User\Domain\Services\UserFinder;
 use Quicktrack\User\Domain\Services\ValidatePassword;
 use Quicktrack\User\Domain\ValueObjects\UserEmail;
 use Quicktrack\User\Domain\ValueObjects\UserPassword;
+use Shared\Domain\Errors;
 
 final class AuthLogin
 {
@@ -26,8 +27,15 @@ final class AuthLogin
 
     public function __invoke(AuthLoginRequest $request): array
     {
-        $user = ($this->finder)(new UserEmail($request->email()));
-        ($this->validatePassword)($user, new UserPassword($request->password()));
-        return $this->repository->generateAuthToken($user);
+        $userEmail = new UserEmail($request->email());
+        $password = new UserPassword($request->password());
+
+        if (!Errors::getInstance()->hasErrors()){
+            $user = ($this->finder)($userEmail);
+            ($this->validatePassword)($user, $password);
+            return $this->repository->generateAuthToken($user);
+        }
+
+        return [];
     }
 }

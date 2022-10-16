@@ -34,6 +34,38 @@ final class LoginControllerTest extends TestCase
     /**
      * @test
      */
+    public function itShouldValidateEmptyEmail()
+    {
+        $response = $this->postJson('/api/auth/login', [
+            'email' => '',
+            'password' => 'password'
+        ]);
+
+        $response
+            ->assertStatus(400)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('errors', ["The Email can't be empty", "Email is invalid"]);
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldValidateEmptyPassword()
+    {
+        $response = $this->postJson('/api/auth/login', [
+            'email' => 'usuario@gmail.com',
+            'password' => ''
+        ]);
+
+        $response
+            ->assertStatus(400)
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('errors', ["The Password can't be empty"]);
+    }
+
+    /**
+     * @test
+     */
     public function itShoulNotAutorizationUser()
     {
         $response = $this->postJson('/api/auth/login', [
