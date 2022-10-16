@@ -197,9 +197,9 @@ return [
 
         // HEXAGONAL ZONE //
         // STATUS - SYSTEM //
-        \Quicktrack\User\Infrastructure\Services\DependencyServiceProvider::class
+        \Quicktrack\User\Infrastructure\Services\DependencyServiceProvider::class,
+        \Quicktrack\EmailHistory\Infrastructure\Services\DependencyServiceProvider::class
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Class Aliases

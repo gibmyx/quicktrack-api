@@ -14,8 +14,7 @@ class AppServiceProvider extends ServiceProvider
 {
 
     private $wiringObjects = [
-        CarRepository::class => EloquentCarRepository::class,
-        EmailHistoryRepository::class => EloquentEmailHistoryRepository::class,
+        CarRepository::class => EloquentCarRepository::class
     ];
     /**
      * Register any application services.

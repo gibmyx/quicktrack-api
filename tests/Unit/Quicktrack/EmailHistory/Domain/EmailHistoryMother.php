@@ -51,6 +51,58 @@ final class EmailHistoryMother
         );
     }
 
+    public static function withEmailEmpty(): EmailHistory
+    {
+        return self::create(
+            EmailHistoryIdMother::random(),
+            EmailHistoryCodeMother::random(),
+            EmailHistoryNameMother::random(),
+            EmailHistoryEmailMother::create(''),
+            EmailHistoryPhoneMother::random(),
+            EmailHistoryMessageMother::random(),
+            EmailHistoryTypeMother::random()
+        );
+    }
+
+    public static function withNameEmpty(): EmailHistory
+    {
+        return self::create(
+            EmailHistoryIdMother::random(),
+            EmailHistoryCodeMother::random(),
+            EmailHistoryNameMother::create(''),
+            EmailHistoryEmailMother::random(),
+            EmailHistoryPhoneMother::random(),
+            EmailHistoryMessageMother::random(),
+            EmailHistoryTypeMother::random()
+        );
+    }
+
+    public static function withPhoneEmpty(): EmailHistory
+    {
+        return self::create(
+            EmailHistoryIdMother::random(),
+            EmailHistoryCodeMother::random(),
+            EmailHistoryNameMother::random(),
+            EmailHistoryEmailMother::random(),
+            EmailHistoryPhoneMother::create(''),
+            EmailHistoryMessageMother::random(),
+            EmailHistoryTypeMother::random()
+        );
+    }
+
+    public static function withMessageEmpty(): EmailHistory
+    {
+        return self::create(
+            EmailHistoryIdMother::random(),
+            EmailHistoryCodeMother::random(),
+            EmailHistoryNameMother::random(),
+            EmailHistoryEmailMother::random(),
+            EmailHistoryPhoneMother::random(),
+            EmailHistoryMessageMother::create(''),
+            EmailHistoryTypeMother::random()
+        );
+    }
+
     public static function fromRequest(EmailHistoryCreatorRequest $request): EmailHistory
     {
         return self::create(

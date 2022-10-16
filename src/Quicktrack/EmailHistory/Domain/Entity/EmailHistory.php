@@ -87,7 +87,7 @@ final class EmailHistory
             'name' => $this->name()->value(),
             'email' => $this->email()->value(),
             'phone' => $this->phone()->value(),
-            'messege' => $this->phone()->value(),
+            'message' => $this->message()->value(),
             'type' => $this->type()->value(),
             'status' => $this->status()->value(),
             'created_at' => $this->createdAt()->value(),

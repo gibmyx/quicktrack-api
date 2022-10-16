@@ -13,6 +13,7 @@ use Quicktrack\EmailHistory\Domain\ValueObjects\EmailHistoryMessage;
 use Quicktrack\EmailHistory\Domain\ValueObjects\EmailHistoryName;
 use Quicktrack\EmailHistory\Domain\ValueObjects\EmailHistoryPhone;
 use Quicktrack\EmailHistory\Domain\ValueObjects\EmailHistoryType;
+use Shared\Domain\Errors;
 
 final class EmailHistoryCreator
 {
@@ -32,6 +33,9 @@ final class EmailHistoryCreator
             new EmailHistoryMessage($request->message()),
             new EmailHistoryType($request->type()),
         );
-        $this->repository->create($emailHistory);
+
+        if (!Errors::getInstance()->hasErrors()){
+            $this->repository->create($emailHistory);
+        }
     }
 }
