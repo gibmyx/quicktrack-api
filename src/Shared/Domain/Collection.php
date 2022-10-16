@@ -28,14 +28,25 @@ abstract class Collection implements \Countable, \IteratorAggregate
         return count($this->items());
     }
 
-    protected function each(callable $fn): void
+    public function each(callable $fn): void
     {
-        each($fn, $this->items());
+        foreach ($this->items() as $item) {
+            $fn($item);
+        }
+        //each($fn, $this->items());
     }
 
     protected function items(): array
     {
         return $this->items;
+    }
+
+    public function toArray(): array
+    {
+        return array_map(
+            fn($item) => $item->toArray(),
+            $this->items
+        );
     }
 
     private function ensureInstanceOf(string $type, array $items)
