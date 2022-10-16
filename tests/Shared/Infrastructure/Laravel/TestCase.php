@@ -4,6 +4,7 @@ namespace Tests\Shared\Infrastructure\Laravel;
 
 use Firebase\JWT\JWT;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Quicktrack\User\Infrastructure\Eloquent\Models\User;
 use Shared\Domain\Errors;
 use Tests\TestCase as LaravelTestCase;

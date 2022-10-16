@@ -16,7 +16,9 @@ class EmailHistory extends Model
         'code',
         'name',
         'email',
+        'message',
         'phone',
-        'type'
+        'type',
+        'status'
     ];
 }

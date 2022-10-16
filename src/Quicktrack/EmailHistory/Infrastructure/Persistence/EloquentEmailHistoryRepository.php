@@ -35,7 +35,7 @@ final class EloquentEmailHistoryRepository implements EmailHistoryRepository
             $modelsEmailHistory->name,
             $modelsEmailHistory->email,
             $modelsEmailHistory->phone,
-            $modelsEmailHistory->messege,
+            $modelsEmailHistory->message,
             $modelsEmailHistory->type,
             $modelsEmailHistory->status,
             $modelsEmailHistory->created_at->format('Y-m-d H:i:s'),

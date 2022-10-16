@@ -18,12 +18,12 @@ final class EmailHistoryFinder
     public function __invoke(
         EmailHistoryId $emailHistoryId
     ) {
-        $car = $this->repository->find($emailHistoryId);
+        $emailHistory = $this->repository->find($emailHistoryId);
 
-        if (null === $car) {
-            throw new DomainNotExistsException("There's not any car with ID {$emailHistoryId->value()}");
+        if (null === $emailHistory) {
+            throw new DomainNotExistsException("There's not any Email history with ID {$emailHistoryId->value()}");
         }
 
-        return $car;
+        return $emailHistory;
     }
 }
