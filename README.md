@@ -21,3 +21,13 @@
 ## Run url in nav
     - http://localhost:8000/
 
+## Create user tinker for tests
+    - make login-php
+
+    - php artisan tinker
+    - $user = new \Quicktrack\User\Infrastructure\Eloquent\Models\User;
+    - $user->name = "xxx";
+    - $user->email = "example@example.com";
+    - $user->password = Hash::make("12345");
+    - $user->save();
+
