@@ -19,7 +19,7 @@ final class EmailNotificationDeleter
         $this->finder = new EmailNotificationFinder($repository);
     }
 
-    public function __invoke(EmailNotificationDeleterRequest $request)
+    public function __invoke(EmailNotificationDeleterRequest $request): void
     {
         $emailNotification = ($this->finder)(new EmailNotificationId($request->id()));
 

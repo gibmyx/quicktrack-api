@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace Quicktrack\EmailNotification\Application\Create;
-
 
 use Quicktrack\EmailNotification\Domain\Contract\EmailNotificationRepository;
 use Quicktrack\EmailNotification\Domain\Entity\EmailNotification;
@@ -20,7 +18,7 @@ final class EmailNotificationCreator
     ) {
     }
 
-    public function __invoke(EmailNotificationCreatorRequest $request)
+    public function __invoke(EmailNotificationCreatorRequest $request): void
     {
         $emalNotification = EmailNotification::create(
             new EmailNotificationId($request->id()),
