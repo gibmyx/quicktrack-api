@@ -27,7 +27,7 @@ final class EmailNotificationCreator
         );
 
         if (!Errors::getInstance()->hasErrors()) {
-            $this->repository->save($emalNotification);
+            $this->repository->create($emalNotification);
         }
     }
 }

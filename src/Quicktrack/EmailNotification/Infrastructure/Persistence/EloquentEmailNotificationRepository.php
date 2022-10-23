@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Quicktrack\EmailNotification\Infrastructure\Persistence;
 
+use Quicktrack\Car\Infrastructure\Persistence\EloquentQueryCarFilters;
 use Quicktrack\EmailNotification\Domain\Entity\EmailNotification;
 use Quicktrack\EmailNotification\Domain\ValueObjects\EmailNotificationId;
 use Quicktrack\EmailNotification\Domain\Contract\EmailNotificationRepository;
 use Quicktrack\EmailNotification\Infrastructure\Eloquent\Models\EmailNotification as ModelsEmailNotification;
 
-final class EloquentEmailNotificationRepository implements EmailNotificationRepository
+final class EloquentEmailNotificationRepository extends EloquentQueryCarFilters implements EmailNotificationRepository
 {
     public function create(EmailNotification $emailNotification): void
     {
@@ -27,7 +28,11 @@ final class EloquentEmailNotificationRepository implements EmailNotificationRepo
 
     public function delete(EmailNotificationId $id): void
     {
-        ModelsEmailNotification::where('id', $id->value())->delete();
+        $emailNotificationModel = ModelsEmailNotification::find($id->value());
+
+        if ($emailNotificationModel) {
+            $emailNotificationModel->delete();
+        }
     }
 
     public function find(EmailNotificationId $id): ?EmailNotification
@@ -38,6 +43,19 @@ final class EloquentEmailNotificationRepository implements EmailNotificationRepo
             return null;
         }
 
+        return $this->toEntity($modelsEmailNotification);
+    }
+
+    public function matching(array $filters): array
+    {
+        return $this->apply(ModelsEmailNotification::query(), $filters)
+            ->get()
+            ->map(fn(ModelsEmailNotification $modelsEmailNotification) => $this->toEntity($modelsEmailNotification))
+            ->toArray();
+    }
+
+    private function toEntity(ModelsEmailNotification $modelsEmailNotification): EmailNotification
+    {
         return EmailNotification::fromPrimitives(
             $modelsEmailNotification->id,
             $modelsEmailNotification->name,
@@ -45,10 +63,5 @@ final class EloquentEmailNotificationRepository implements EmailNotificationRepo
             $modelsEmailNotification->created_at->format('Y-m-d H:i:s'),
             $modelsEmailNotification->updated_at->format('Y-m-d H:i:s')
         );
-    }
-
-    public function matching(array $filters): array
-    {
-        return [];
     }
 }

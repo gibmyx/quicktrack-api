@@ -87,4 +87,21 @@ final class EmailNotification
             'updated_at' => $this->updatedAt()->value(),
         ];
     }
+
+    public function changeName(EmailNotificationName $newName)
+    {
+        if (! $this->name->equals($newName)) {
+            $this->name = $newName;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
+
+    public function changeEmail(EmailNotificationEmail $newEmail)
+    {
+        if (! $this->email->equals($newEmail)) {
+            $this->email = $newEmail;
+            $this->updatedAt = new DateTimeValueObject();
+        }
+    }
+
 }
