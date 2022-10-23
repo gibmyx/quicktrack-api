@@ -11,12 +11,18 @@ use Quicktrack\EmailNotification\Infrastructure\Eloquent\Models\EmailNotificatio
 
 final class EloquentEmailNotificationRepository implements EmailNotificationRepository
 {
-    public function save(EmailNotification $emailNotification): void
+    public function create(EmailNotification $emailNotification): void
     {
-        ModelsEmailNotification::updateOrCreate(
-            ['id' => $emailNotification->id()->value()],
-            $emailNotification->toArray()
-        );
+        ModelsEmailNotification::create($emailNotification->toArray());
+    }
+
+    public function update(EmailNotification $emailNotification): void
+    {
+        $emailNotificationModel = ModelsEmailNotification::find($emailNotification->id()->value());
+
+        if ($emailNotificationModel) {
+            $emailNotificationModel->update($emailNotification->toArray());
+        }
     }
 
     public function delete(EmailNotificationId $id): void

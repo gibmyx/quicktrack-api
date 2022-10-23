@@ -9,7 +9,8 @@ use Quicktrack\EmailNotification\Domain\ValueObjects\EmailNotificationId;
 
 interface EmailNotificationRepository
 {
-    public function save(EmailNotification $emailNotification): void;
+    public function create(EmailNotification $emailNotification): void;
+    public function update(EmailNotification $emailNotification): void;
     public function delete(EmailNotificationId $id): void;
     public function find(EmailNotificationId $id): ?EmailNotification;
     public function matching(array $filters): array;

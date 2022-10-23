@@ -10,6 +10,8 @@ use Quicktrack\EmailHistory\Domain\Services\EmailHistoryFinder as ServiceEmailHi
 
 final class EmailHistoryFinder
 {
+    private ServiceEmailHistoryFinder $finder;
+
     public function __construct(
         private EmailHistoryRepository $repository
     ) {
