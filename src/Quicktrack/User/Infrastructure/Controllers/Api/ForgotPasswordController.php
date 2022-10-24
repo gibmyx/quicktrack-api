@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Validator;
 final class ForgotPasswordController extends Controller
 {
     private $messages = [
-        Password::RESET_LINK_SENT => "Correo de enviado con exito.",
+        Password::RESET_LINK_SENT => "Correo se a enviado con exito.",
         Password::RESET_THROTTLED => "Por favor espere unos minutos para enviar nuevamente el correo.",
         Password::INVALID_USER => "El correo no es valido.",
     ];
