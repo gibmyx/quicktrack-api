@@ -18,7 +18,11 @@ final class EloquentEmailHistoryRepository implements EmailHistoryRepository
 
     public function update(EmailHistory $EmailHistory): void
     {
-        ModelsEmailHistory::update($EmailHistory->toArray());
+        $modelsEmailHistory = ModelsEmailHistory::find($EmailHistory->id()->value());
+
+        if ($modelsEmailHistory) {
+            $modelsEmailHistory->update($EmailHistory->toArray());
+        }
     }
 
     public function find(EmailHistoryId $carId): ?EmailHistory
