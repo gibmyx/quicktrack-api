@@ -153,4 +153,22 @@ final class CarMother
             CarStatusMother::random()
         );
     }
+
+    public static function withCode(string $code): Car
+    {
+        return self::create(
+            CarIdMother::random(),
+            CarCodeMother::create($code),
+            CarBrandMother::random(),
+            CarModelMother::random(),
+            CarColorMother::random(),
+            CarFuelMother::random(),
+            CarGearboxMother::random(),
+            CarKilometerMother::random(),
+            CarPriceMother::random(),
+            CarTypeMother::random(),
+            CarYearMother::random(),
+            CarStatusMother::random()
+        );
+    }
 }

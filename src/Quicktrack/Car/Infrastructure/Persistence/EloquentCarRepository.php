@@ -63,4 +63,9 @@ final class EloquentCarRepository extends EloquentQueryCarFilters implements Car
             $modelsCar->updated_at->format('Y-m-d H:i:s'),
         );
     }
+
+    public function last(): ?Car
+    {
+        return null;
+    }
 }

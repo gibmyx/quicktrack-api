@@ -13,4 +13,5 @@ interface CarRepository
     public function update(Car $car): void;
     public function find(CarId $carId): ?Car;
     public function matching(array $filters): array;
+    public function last(): ?Car;
 }
