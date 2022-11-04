@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Validator;
 final class ForgotPasswordController extends Controller
 {
     private $messages = [
-        Password::RESET_LINK_SENT => "Correo se a enviado con exito.",
-        Password::RESET_THROTTLED => "Por favor espere unos minutos para enviar nuevamente el correo.",
-        Password::INVALID_USER => "El correo no es valido.",
+        Password::RESET_LINK_SENT => "Mail has been sent successfully.",
+        Password::RESET_THROTTLED => "Please wait a few minutes to send the email again.",
+        Password::INVALID_USER => "This email isn't valid.",
     ];
 
     public function __invoke(Request $request): JsonResponse
@@ -34,7 +34,7 @@ final class ForgotPasswordController extends Controller
         return response()->json([
             "message" => key_exists($status, $this->messages)
                 ? $this->messages[$status]
-                : "Ah currido un error. Por favor intentelo mas tarde",
+                : "An error has occurred. please try again later",
             "ok" => $status == Password::RESET_LINK_SENT ? true : false
         ], $code);
     }

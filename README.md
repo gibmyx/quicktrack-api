@@ -41,4 +41,4 @@
     - change values in QUEUE_CONNECTION to "database"
     - make clear-cache
     - make login-php
-    - run php artisan queue:work ** for background processes **
+    - run "php artisan queue:work" ** for background processes **
