@@ -20,6 +20,8 @@ use Shared\Domain\ValueObjects\DateTimeValueObject;
 
 final class Car
 {
+    public const PREFIX = 'CR';
+    
     private function __construct(
         private CarId $id,
         private CarCode $code,

@@ -33,7 +33,7 @@ final class EloquentCarRepository extends EloquentQueryCarFilters implements Car
     {
         $modelsCar = ModelsCar::find($carId->value());
 
-        if (! $modelsCar) {
+        if (!$modelsCar) {
             return null;
         }
 
@@ -88,5 +88,10 @@ final class EloquentCarRepository extends EloquentQueryCarFilters implements Car
         return function (ModelsCar $modelsCar) {
             return $this->toEntity($modelsCar);
         };
+    }
+
+    public function last(): ?Car
+    {
+        return null;
     }
 }
