@@ -2,23 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\Car\Application\Search;
+namespace Quicktrack\Brand\Application\search;
 
-use Quicktrack\Car\Domain\Collection\Cars;
-use Quicktrack\Car\Domain\Contract\CarRepository;
+use Quicktrack\Brand\Domain\Collection\Brands;
+use Quicktrack\Brand\Domain\Contract\BrandRepository;
 use Shared\Domain\Criteria\Criteria;
 use Shared\Domain\Criteria\Filters;
 use Shared\Domain\Criteria\Order;
 
-final class CarSearcher
+final class BrandSearcher
 {
     public function __construct(
-        private CarRepository $repository
-    )
-    {
+        private BrandRepository $repository
+    ) {
     }
 
-    public function __invoke(CarSearcherRequest $request): Cars
+    public function __invoke(BrandSearcherRequest $request): Brands
     {
         $criteria = new Criteria(
             Filters::fromValues($request->filters()),

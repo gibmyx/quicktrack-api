@@ -2,34 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\EmailHistory\Infrastructure\Controllers;
+
+namespace Quicktrack\EmailNotification\Infrastructure\Controllers\Api;
+
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Quicktrack\EmailHistory\Application\Create\EmailHistoryCreator;
-use Quicktrack\EmailHistory\Application\Create\EmailHistoryCreatorRequest;
+use Quicktrack\EmailNotification\Application\Delete\EmailNotificationDeleter;
+use Quicktrack\EmailNotification\Application\Delete\EmailNotificationDeleterRequest;
 use Shared\Domain\Errors;
 
-final class EmailHistoryPostController extends Controller
+final class EmailNotificationDeleteController extends Controller
 {
     public function __construct(
-        private EmailHistoryCreator $creator
+        private EmailNotificationDeleter $deleter
     ) {
     }
 
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(string $id): JsonResponse
     {
         try {
-            ($this->creator)(new EmailHistoryCreatorRequest(
-                $request->id ?? '',
-                $request->code ?? '',
-                $request->name ?? '',
-                $request->email ?? '',
-                $request->phone ?? '',
-                $request->message ?? '',
-                $request->type ?? '',
-            ));
+            ($this->deleter)(new EmailNotificationDeleterRequest($id));
             return $this->response();
         } catch (\Exception $exception) {
 

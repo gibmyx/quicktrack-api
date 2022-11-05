@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\Car\Domain\Collection;
+namespace Quicktrack\Brand\Domain\Collection;
 
-use Quicktrack\Car\Domain\Entity\Car;
+use Quicktrack\Brand\Domain\Entity\Brand;
 use Shared\Domain\Collection;
 
-final class Cars extends Collection
+final class Brands extends Collection
 {
     public function __construct(
         array $items,
         private ?int $currentPage = null,
         private ?int $lastPage = null,
         private ?int $total = null
-    )
-    {
+    ) {
         parent::__construct($items);
     }
 
@@ -36,6 +35,6 @@ final class Cars extends Collection
 
     protected function type(): string
     {
-        return Car::class;
+        return Brand::class;
     }
 }

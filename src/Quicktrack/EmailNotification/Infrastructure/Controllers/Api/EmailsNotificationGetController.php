@@ -2,25 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\Car\Infrastructure\Controllers\Api;
+namespace Quicktrack\EmailNotification\Infrastructure\Controllers\Api;
 
+use Shared\Domain\Errors;
+use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Quicktrack\Car\Application\Search\CarSearcher;
-use Quicktrack\Car\Application\Search\CarSearcherRequest;
-use Shared\Domain\Errors;
+use Quicktrack\EmailNotification\Application\Search\EmailNotificationSearcher;
+use Quicktrack\EmailNotification\Application\Search\EmailNotificationSearcherRequest;
+use function Lambdish\Phunctional\map;
 
-final class CarsGetController extends Controller
+final class EmailsNotificationGetController extends Controller
 {
+
     public function __construct(
-        private CarSearcher $searcher
+        private EmailNotificationSearcher $searcher
     ) {
     }
 
     public function __invoke(Request $request): JsonResponse
     {
-        $cars = ($this->searcher)(new CarSearcherRequest(
+        $emailsNotification = ($this->searcher)(new EmailNotificationSearcherRequest(
             $request->filters ?? [],
             $request->orderBy,
             $request->order,
@@ -42,10 +44,11 @@ final class CarsGetController extends Controller
             [
                 'ok' => true,
                 'content' => [
-                    'cars' => $cars->toArray(),
-                    'total' => $cars->total(),
-                    'lastPage' => $cars->lastPage(),
-                    'currentPage' => $cars->currentPage()
+                    'emailsNotification' => map(fn($email) => array_merge($email, ['mode' => 'update']),
+                        $emailsNotification->toArray()),
+                    'total' => $emailsNotification->total(),
+                    'lastPage' => $emailsNotification->lastPage(),
+                    'currentPage' => $emailsNotification->currentPage()
                 ],
                 'errors' => []
             ],

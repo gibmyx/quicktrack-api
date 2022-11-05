@@ -199,7 +199,8 @@ return [
         // STATUS - SYSTEM //
         \Quicktrack\User\Infrastructure\Services\DependencyServiceProvider::class,
         \Quicktrack\EmailHistory\Infrastructure\Services\DependencyServiceProvider::class,
-        \Quicktrack\EmailNotification\Infrastructure\Services\DependencyServiceProvider::class
+        \Quicktrack\EmailNotification\Infrastructure\Services\DependencyServiceProvider::class,
+        \Quicktrack\Brand\Infrastructure\Services\DependencyServiceProvider::class
     ],
     /*
     |--------------------------------------------------------------------------

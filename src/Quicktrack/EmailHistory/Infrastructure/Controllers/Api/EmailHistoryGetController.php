@@ -2,31 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\EmailNotification\Infrastructure\Controllers;
+namespace Quicktrack\EmailHistory\Infrastructure\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Quicktrack\EmailNotification\Application\Create\EmailNotificationCreator;
-use Quicktrack\EmailNotification\Application\Create\EmailNotificationCreatorRequest;
+use Quicktrack\EmailHistory\Application\Find\EmailHistoryFinder;
+use Quicktrack\EmailHistory\Application\Find\EmailHistoryFinderRequest;
 use Shared\Domain\Errors;
 
-final class EmailNotificationPostController extends Controller
+final class EmailHistoryGetController extends Controller
 {
     public function __construct(
-        private EmailNotificationCreator $creator
+        private EmailHistoryFinder $finder
     ) {
     }
 
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(string $id)
     {
         try {
-            ($this->creator)(new EmailNotificationCreatorRequest(
-                $request->id ?? '',
-                $request->name ?? '',
-                $request->email ?? ''
-            ));
-            return $this->response();
+            $response = ($this->finder)(new EmailHistoryFinderRequest($id));
+            return $this->response($response);
         } catch (\Exception $exception) {
 
             $code = $exception->getCode() === 0
@@ -41,7 +36,7 @@ final class EmailNotificationPostController extends Controller
         }
     }
 
-    private function response()
+    private function response($response)
     {
         if (Errors::getInstance()->hasErrors()) {
             return new JsonResponse(
@@ -56,8 +51,10 @@ final class EmailNotificationPostController extends Controller
 
         return new JsonResponse([
             'ok' => true,
-            'content' => [],
+            'content' => [
+                'emailHistory' => $response->toArray()
+            ],
             'errors' => []
-        ], JsonResponse::HTTP_CREATED);
+        ], JsonResponse::HTTP_OK);
     }
 }

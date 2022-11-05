@@ -10,7 +10,7 @@ use Tests\Unit\Quicktrack\Car\Domain\CarsMother;
 
 class CarsGetControllerTest extends TestCase
 {
-    
+
     /**
      * @test
      */
@@ -26,7 +26,7 @@ class CarsGetControllerTest extends TestCase
         $cars->each(fn(Car $car) => $this->postJson('/api/car', $car->toArray(), ['x-token' => $this->token]));
 
         $response = $this->getJson(
-            "/api/cars?{$query}",
+            "/api/cars?page=1&limit=10&orderBy=code&order=asc&{$query}",
             ['x-token' => $this->token]
         );
 
@@ -35,8 +35,11 @@ class CarsGetControllerTest extends TestCase
             'ok' => true,
             'content' => [
                 'cars' => [
-                    $car3->toArray()
-                ]
+                    $car3->toArray(),
+                ],
+                "total" => 1,
+                "lastPage" => 1,
+                "currentPage" => 1
             ],
             'errors' => []
         ]);
