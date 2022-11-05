@@ -332,9 +332,8 @@
                                 <div class="text" style="padding: 0 2.5em; text-align: center;">
                                     <h3>Restablecimiento de contraseña</h3>
                                     <h4>Has recibido este correo electrónico porque hemos recibido una solicitud de restablecimiento de contraseña para tu cuenta.</h4>
-                                    <p><a href="#" class="btn btn-primary">Cambiar contraseña</a></p>
+                                    <p><a href="{{$url}}" class="btn btn-primary">Cambiar contraseña</a></p>
                                     <h4>Este enlace de restablecimiento de contraseña caducará en unos minutos.</h4>
-                                    <h4>{{$url}}</h4>
                                 </div>
                             </td>
                         </tr>
