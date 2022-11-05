@@ -15,9 +15,9 @@ use Illuminate\Auth\Events\PasswordReset;
 class NewPasswordController extends Controller
 {
     private $messages = [
-        Password::PASSWORD_RESET => "Contraseña cambiada con exito.",
-        Password::INVALID_USER => "El correo no es valido.",
-        Password::INVALID_TOKEN => "El link de recuperacion de contraseña no es valido",
+        Password::PASSWORD_RESET => "Password changed successfully.",
+        Password::INVALID_USER => "This email isn't valid.",
+        Password::INVALID_TOKEN => "The password recovery link is not valid.",
     ];
 
     public function __invoke(Request $request)
@@ -48,7 +48,7 @@ class NewPasswordController extends Controller
         return response()->json([
             "message" => key_exists($status, $this->messages)
                 ? $this->messages[$status]
-                : "Ah currido un error. Por favor intentelo mas tarde",
+                : "An error has occurred. please try again later",
             "ok" => $status == Password::PASSWORD_RESET ? true : false
         ], $code);
     }
