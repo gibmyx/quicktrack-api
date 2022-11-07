@@ -6,6 +6,9 @@ namespace Quicktrack\Car\Application\Search;
 
 use Quicktrack\Car\Domain\Collection\Cars;
 use Quicktrack\Car\Domain\Contract\CarRepository;
+use Shared\Domain\Criteria\Criteria;
+use Shared\Domain\Criteria\Filters;
+use Shared\Domain\Criteria\Order;
 
 final class CarSearcher
 {
@@ -17,8 +20,12 @@ final class CarSearcher
 
     public function __invoke(CarSearcherRequest $request): Cars
     {
-        return new Cars
-            ($this->repository->matching($request->filters())
+        $criteria = new Criteria(
+            Filters::fromValues($request->filters()),
+            Order::fromValues($request->orderBy(), $request->order()),
+            $request->limit()
         );
+
+        return $this->repository->matching($criteria);
     }
 }

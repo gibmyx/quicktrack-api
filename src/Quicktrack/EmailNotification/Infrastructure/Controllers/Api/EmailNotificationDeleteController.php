@@ -2,26 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\EmailHistory\Infrastructure\Controllers;
+
+namespace Quicktrack\EmailNotification\Infrastructure\Controllers\Api;
+
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Quicktrack\EmailHistory\Application\Find\EmailHistoryFinder;
-use Quicktrack\EmailHistory\Application\Find\EmailHistoryFinderRequest;
+use Quicktrack\EmailNotification\Application\Delete\EmailNotificationDeleter;
+use Quicktrack\EmailNotification\Application\Delete\EmailNotificationDeleterRequest;
 use Shared\Domain\Errors;
 
-final class EmailHistoryGetController extends Controller
+final class EmailNotificationDeleteController extends Controller
 {
     public function __construct(
-        private EmailHistoryFinder $finder
+        private EmailNotificationDeleter $deleter
     ) {
     }
 
-    public function __invoke(string $id)
+    public function __invoke(string $id): JsonResponse
     {
         try {
-            $response = ($this->finder)(new EmailHistoryFinderRequest($id));
-            return $this->response($response);
+            ($this->deleter)(new EmailNotificationDeleterRequest($id));
+            return $this->response();
         } catch (\Exception $exception) {
 
             $code = $exception->getCode() === 0
@@ -36,7 +38,7 @@ final class EmailHistoryGetController extends Controller
         }
     }
 
-    private function response($response)
+    private function response()
     {
         if (Errors::getInstance()->hasErrors()) {
             return new JsonResponse(
@@ -51,10 +53,8 @@ final class EmailHistoryGetController extends Controller
 
         return new JsonResponse([
             'ok' => true,
-            'content' => [
-                'emailHistory' => $response->toArray()
-            ],
+            'content' => [],
             'errors' => []
-        ], JsonResponse::HTTP_OK);
+        ], JsonResponse::HTTP_CREATED);
     }
 }

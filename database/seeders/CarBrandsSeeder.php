@@ -1,0 +1,97 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Shared\Domain\ValueObjects\Uuid;
+use Illuminate\Support\Facades\DB;
+
+class CarBrandsSeeder extends Seeder
+{
+    public function run()
+    {
+        $brands = [
+            ['id' => Uuid::random()->value(), 'value' => 'acura', 'name' => 'Acura'],
+            ['id' => Uuid::random()->value(), 'value' => 'alfa-romeo', 'name' => 'Alfa Romeo'],
+            ['id' => Uuid::random()->value(), 'value' => 'aptera', 'name' => 'Aptera'],
+            ['id' => Uuid::random()->value(), 'value' => 'aston-martin', 'name' => 'Aston Martin'],
+            ['id' => Uuid::random()->value(), 'value' => 'audi', 'name' => 'Audi'],
+            ['id' => Uuid::random()->value(), 'value' => 'austin', 'name' => 'Austin'],
+            ['id' => Uuid::random()->value(), 'value' => 'bentley', 'name' => 'Bentley'],
+            ['id' => Uuid::random()->value(), 'value' => 'bmw', 'name' => 'BMW'],
+            ['id' => Uuid::random()->value(), 'value' => 'bugatti', 'name' => 'Bugatti'],
+            ['id' => Uuid::random()->value(), 'value' => 'buick', 'name' => 'Buick'],
+            ['id' => Uuid::random()->value(), 'value' => 'cadillac', 'name' => 'Cadillac'],
+            ['id' => Uuid::random()->value(), 'value' => 'chevrolet', 'name' => 'Chevrolet'],
+            ['id' => Uuid::random()->value(), 'value' => 'chrysler', 'name' => 'Chrysler'],
+            ['id' => Uuid::random()->value(), 'value' => 'citroen', 'name' => 'Citroën'],
+            ['id' => Uuid::random()->value(), 'value' => 'corbin', 'name' => 'Corbin'],
+            ['id' => Uuid::random()->value(), 'value' => 'daewoo', 'name' => 'Daewoo'],
+            ['id' => Uuid::random()->value(), 'value' => 'daihatsu', 'name' => 'Daihatsu'],
+            ['id' => Uuid::random()->value(), 'value' => 'dodge', 'name' => 'Dodge'],
+            ['id' => Uuid::random()->value(), 'value' => 'eagle', 'name' => 'Eagle'],
+            ['id' => Uuid::random()->value(), 'value' => 'fairthorpe', 'name' => 'Fairthorpe'],
+            ['id' => Uuid::random()->value(), 'value' => 'ferrari', 'name' => 'Ferrari'],
+            ['id' => Uuid::random()->value(), 'value' => 'fiat', 'name' => 'FIAT'],
+            ['id' => Uuid::random()->value(), 'value' => 'fillmore', 'name' => 'Fillmore'],
+            ['id' => Uuid::random()->value(), 'value' => 'foose', 'name' => 'Foose'],
+            ['id' => Uuid::random()->value(), 'value' => 'ford', 'name' => 'Ford'],
+            ['id' => Uuid::random()->value(), 'value' => 'geo', 'name' => 'Geo'],
+            ['id' => Uuid::random()->value(), 'value' => 'gmc', 'name' => 'GMC'],
+            ['id' => Uuid::random()->value(), 'value' => 'hillman', 'name' => 'Hillman'],
+            ['id' => Uuid::random()->value(), 'value' => 'holden', 'name' => 'Holden'],
+            ['id' => Uuid::random()->value(), 'value' => 'honda', 'name' => 'Honda'],
+            ['id' => Uuid::random()->value(), 'value' => 'hummer', 'name' => 'HUMMER'],
+            ['id' => Uuid::random()->value(), 'value' => 'hyundai', 'name' => 'Hyundai'],
+            ['id' => Uuid::random()->value(), 'value' => 'infiniti', 'name' => 'Infiniti'],
+            ['id' => Uuid::random()->value(), 'value' => 'isuzu', 'name' => 'Isuzu'],
+            ['id' => Uuid::random()->value(), 'value' => 'jaguar', 'name' => 'Jaguar'],
+            ['id' => Uuid::random()->value(), 'value' => 'jeep', 'name' => 'Jeep'],
+            ['id' => Uuid::random()->value(), 'value' => 'jensen', 'name' => 'Jensen'],
+            ['id' => Uuid::random()->value(), 'value' => 'kia', 'name' => 'Kia'],
+            ['id' => Uuid::random()->value(), 'value' => 'lamborghini', 'name' => 'Lamborghini'],
+            ['id' => Uuid::random()->value(), 'value' => 'land-rover', 'name' => 'Land Rover'],
+            ['id' => Uuid::random()->value(), 'value' => 'lexus', 'name' => 'Lexus'],
+            ['id' => Uuid::random()->value(), 'value' => 'lincoln', 'name' => 'Lincoln'],
+            ['id' => Uuid::random()->value(), 'value' => 'lotus', 'name' => 'Lotus'],
+            ['id' => Uuid::random()->value(), 'value' => 'maserati', 'name' => 'Maserati'],
+            ['id' => Uuid::random()->value(), 'value' => 'maybach', 'name' => 'Maybach'],
+            ['id' => Uuid::random()->value(), 'value' => 'mazda', 'name' => 'Mazda'],
+            ['id' => Uuid::random()->value(), 'value' => 'mclaren', 'name' => 'McLaren'],
+            ['id' => Uuid::random()->value(), 'value' => 'mercedes-benz', 'name' => 'Mercedes-Benz'],
+            ['id' => Uuid::random()->value(), 'value' => 'mercury', 'name' => 'Mercury'],
+            ['id' => Uuid::random()->value(), 'value' => 'merkur', 'name' => 'Merkur'],
+            ['id' => Uuid::random()->value(), 'value' => 'mg', 'name' => 'MG'],
+            ['id' => Uuid::random()->value(), 'value' => 'mini', 'name' => 'MINI'],
+            ['id' => Uuid::random()->value(), 'value' => 'mitsubishi', 'name' => 'Mitsubishi'],
+            ['id' => Uuid::random()->value(), 'value' => 'morgan', 'name' => 'Morgan'],
+            ['id' => Uuid::random()->value(), 'value' => 'nissan', 'name' => 'Nissan'],
+            ['id' => Uuid::random()->value(), 'value' => 'oldsmobile', 'name' => 'Oldsmobile'],
+            ['id' => Uuid::random()->value(), 'value' => 'panoz', 'name' => 'Panoz'],
+            ['id' => Uuid::random()->value(), 'value' => 'peugeot', 'name' => 'Peugeot'],
+            ['id' => Uuid::random()->value(), 'value' => 'plymouth', 'name' => 'Plymouth'],
+            ['id' => Uuid::random()->value(), 'value' => 'pontiac', 'name' => 'Pontiac'],
+            ['id' => Uuid::random()->value(), 'value' => 'porsche', 'name' => 'Porsche'],
+            ['id' => Uuid::random()->value(), 'value' => 'ram', 'name' => 'Ram'],
+            ['id' => Uuid::random()->value(), 'value' => 'rambler', 'name' => 'Rambler'],
+            ['id' => Uuid::random()->value(), 'value' => 'renault', 'name' => 'Renault'],
+            ['id' => Uuid::random()->value(), 'value' => 'rolls-royce', 'name' => 'Rolls-Royce'],
+            ['id' => Uuid::random()->value(), 'value' => 'saab', 'name' => 'Saab'],
+            ['id' => Uuid::random()->value(), 'value' => 'saturn', 'name' => 'Saturn'],
+            ['id' => Uuid::random()->value(), 'value' => 'scion', 'name' => 'Scion'],
+            ['id' => Uuid::random()->value(), 'value' => 'shelby', 'name' => 'Shelby'],
+            ['id' => Uuid::random()->value(), 'value' => 'smart', 'name' => 'Smart'],
+            ['id' => Uuid::random()->value(), 'value' => 'spyker', 'name' => 'Spyker'],
+            ['id' => Uuid::random()->value(), 'value' => 'spyker-cars', 'name' => 'Spyker Cars'],
+            ['id' => Uuid::random()->value(), 'value' => 'studebaker', 'name' => 'Studebaker'],
+            ['id' => Uuid::random()->value(), 'value' => 'subaru', 'name' => 'Subaru'],
+            ['id' => Uuid::random()->value(), 'value' => 'suzuki', 'name' => 'Suzuki'],
+            ['id' => Uuid::random()->value(), 'value' => 'tesla', 'name' => 'Tesla'],
+            ['id' => Uuid::random()->value(), 'value' => 'toyota', 'name' => 'Toyota'],
+            ['id' => Uuid::random()->value(), 'value' => 'volkswagen', 'name' => 'Volkswagen'],
+            ['id' => Uuid::random()->value(), 'value' => 'volvo', 'name' => 'Volvo'],
+        ];
+
+        DB::table('cars_brand')->insert($brands);
+    }
+}

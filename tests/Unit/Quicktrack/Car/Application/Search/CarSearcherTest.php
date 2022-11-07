@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Quicktrack\Car\Application\Search;
 
 use Quicktrack\Car\Application\Search\CarSearcher;
+use Quicktrack\Car\Domain\Collection\Cars;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Domain\Entity\Car;
 use Tests\Shared\Infrastructure\Laravel\TestCase;
@@ -60,11 +61,16 @@ final class CarSearcherTest extends TestCase
     private function shouldSearchByPropEqualTo(\PHPUnit\Framework\MockObject\MockObject $repository, string $prop, string $value, Car ...$cars)
     {
         $filteredCars = array_filter(
-            $cars, 
+            $cars,
             fn(Car $car) => $car->$prop()->value() === $value
         );
 
         $repository->method('matching')
-            ->willReturn(array_values($filteredCars));
+            ->willReturn(new Cars(
+                array_merge($filteredCars, []),
+                null,
+                null,
+                null
+            ));
     }
 }

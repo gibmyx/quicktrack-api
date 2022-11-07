@@ -11,8 +11,7 @@ abstract class Collection implements \Countable, \IteratorAggregate
 {
     public function __construct(
         private array $items
-    )
-    {
+    ) {
         $this->ensureInstanceOf($this->type(), $items);
     }
 

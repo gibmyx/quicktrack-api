@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace Quicktrack\Car\Infrastructure\Persistence;
 
+use Shared\Domain\Criteria\Criteria;
 use Quicktrack\Car\Domain\Entity\Car;
+use Quicktrack\Car\Domain\Collection\Cars;
 use Quicktrack\Car\Domain\ValueObjects\CarId;
 use Quicktrack\Car\Domain\Contract\CarRepository;
 use Quicktrack\Car\Infrastructure\Eloquent\Models\Car as ModelsCar;
+
+use function Lambdish\Phunctional\map;
 
 final class EloquentCarRepository extends EloquentQueryCarFilters implements CarRepository
 {
@@ -29,19 +33,34 @@ final class EloquentCarRepository extends EloquentQueryCarFilters implements Car
     {
         $modelsCar = ModelsCar::find($carId->value());
 
-        if (! $modelsCar) {
+        if (!$modelsCar) {
             return null;
         }
 
         return $this->toEntity($modelsCar);
     }
 
-    public function matching(array $filters): array
+    public function matching(Criteria $criteria): Cars
     {
-        return $this->apply(ModelsCar::query(), $filters)
-            ->get()
-            ->map(fn(ModelsCar $modelsCar) => $this->toEntity($modelsCar))
-            ->toArray();
+        $query = $this->apply(ModelsCar::query(), $criteria);
+
+        if ($criteria->hasOrder()) {
+            $query->orderBy(
+                $criteria->order()->orderBy()->value(),
+                $criteria->order()->orderType()->value()
+            );
+        }
+
+        $cars = $criteria->limit()
+            ? $query->paginate($criteria->limit())
+            : $query->get();
+
+        return new Cars(
+            map($this->toEachEntity(), $criteria->limit() ? $cars->items() : $query->get()),
+            $criteria->limit() ? $cars->currentPage() : null,
+            $criteria->limit() ? $cars->lastPage() : null,
+            $criteria->limit() ? $cars->total() : null
+        );
     }
 
     private function toEntity(ModelsCar $modelsCar): Car
@@ -62,5 +81,17 @@ final class EloquentCarRepository extends EloquentQueryCarFilters implements Car
             $modelsCar->created_at->format('Y-m-d H:i:s'),
             $modelsCar->updated_at->format('Y-m-d H:i:s'),
         );
+    }
+
+    private function toEachEntity(): callable
+    {
+        return function (ModelsCar $modelsCar) {
+            return $this->toEntity($modelsCar);
+        };
+    }
+
+    public function last(): ?Car
+    {
+        return null;
     }
 }

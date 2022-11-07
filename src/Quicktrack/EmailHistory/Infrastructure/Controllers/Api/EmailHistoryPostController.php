@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\EmailHistory\Infrastructure\Controllers;
+namespace Quicktrack\EmailHistory\Infrastructure\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
