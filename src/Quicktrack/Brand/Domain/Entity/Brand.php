@@ -6,26 +6,33 @@ namespace Quicktrack\Brand\Domain\Entity;
 
 use Quicktrack\Brand\Domain\ValueObjects\BrandId;
 use Quicktrack\Brand\Domain\ValueObjects\BrandName;
+use Quicktrack\Brand\Domain\ValueObjects\BrandStatus;
 use Quicktrack\Brand\Domain\ValueObjects\BrandValue;
 
 final class Brand
 {
+    const STATUS_ACTIVO = 'active';
+    const STATUS_INACTIVO = 'inactive';
+
     private function __construct(
         private BrandId $id,
         private BrandValue $value,
-        private BrandName $name
+        private BrandName $name,
+        private BrandStatus $status
     ) {
     }
 
     public static function fromPrimitives(
         string $id,
         string $value,
-        string $name
+        string $name,
+        string $status
     ): self {
         return new self(
             new BrandId($id),
             new BrandValue($value),
-            new BrandName($name)
+            new BrandName($name),
+            new BrandStatus($status),
         );
     }
 
@@ -35,6 +42,7 @@ final class Brand
             'id' => $this->id->value(),
             'value' => $this->value->value(),
             'name' => $this->name->value(),
+            'status' => $this->status->value(),
         ];
     }
 
@@ -51,5 +59,10 @@ final class Brand
     public function name(): BrandName
     {
         return $this->name;
+    }
+
+    public function status(): BrandStatus
+    {
+        return $this->status;
     }
 }

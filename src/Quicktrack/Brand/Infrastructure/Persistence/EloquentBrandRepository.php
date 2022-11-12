@@ -41,7 +41,8 @@ final class EloquentBrandRepository extends EloquentQueryBrandFilters implements
         return Brand::fromPrimitives(
             $modelsBrand->id,
             $modelsBrand->value,
-            $modelsBrand->name
+            $modelsBrand->name,
+            $modelsBrand->status
         );
     }
 

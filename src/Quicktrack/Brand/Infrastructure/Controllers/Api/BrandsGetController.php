@@ -42,7 +42,7 @@ final class BrandsGetController extends Controller
             [
                 'ok' => true,
                 'content' => [
-                    'cars' => $brands->toArray(),
+                    'brands' => $brands->toArray(),
                     'total' => $brands->total(),
                     'lastPage' => $brands->lastPage(),
                     'currentPage' => $brands->currentPage()
