@@ -18,10 +18,10 @@ final class EloquentCarRepository extends EloquentQueryCarFilters implements Car
 
     public function update(Car $car): void
     {
-        $car = ModelsCar::find($car->id()->value());
+        $modelCar = ModelsCar::find($car->id()->value());
 
-        if ($car) {
-            $car->update($car->toArray());
+        if ($modelCar) {
+            $modelCar->update($car->toArray());
         }
     }
 
@@ -44,6 +44,17 @@ final class EloquentCarRepository extends EloquentQueryCarFilters implements Car
             ->toArray();
     }
 
+    public function last(): ?Car
+    {
+        $last = ModelsCar::latest()->first();
+
+        if (! $last) {
+            return null;
+        }
+        
+        return $this->toEntity($last);
+    }
+
     private function toEntity(ModelsCar $modelsCar): Car
     {
         return Car::fromPrimitives(
@@ -62,10 +73,5 @@ final class EloquentCarRepository extends EloquentQueryCarFilters implements Car
             $modelsCar->created_at->format('Y-m-d H:i:s'),
             $modelsCar->updated_at->format('Y-m-d H:i:s'),
         );
-    }
-
-    public function last(): ?Car
-    {
-        return null;
     }
 }
