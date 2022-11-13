@@ -2,28 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\EmailNotification\Infrastructure\Controllers;
+namespace Quicktrack\Brand\Infrastructure\Controllers\Api;
 
 use Shared\Domain\Errors;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Quicktrack\EmailNotification\Application\Search\EmailNotificationSearcher;
-use Quicktrack\EmailNotification\Application\Search\EmailNotificationSearcherRequest;
-use function Lambdish\Phunctional\map;
+use Quicktrack\Brand\Application\search\BrandSearcher;
+use Quicktrack\Brand\Application\search\BrandSearcherRequest;
 
-final class EmailsNotificationGetController extends Controller
+final class BrandsGetController extends Controller
 {
-
     public function __construct(
-        private EmailNotificationSearcher $searcher
+        private BrandSearcher $searcher
     ) {
     }
 
     public function __invoke(Request $request): JsonResponse
     {
-        $emailsNotification = ($this->searcher)(new EmailNotificationSearcherRequest(
+        $brands = ($this->searcher)(new BrandSearcherRequest(
             $request->filters ?? [],
+            $request->orderBy,
+            $request->order,
+            (int)$request->limit,
         ));
 
         if (Errors::getInstance()->hasErrors()) {
@@ -41,7 +42,10 @@ final class EmailsNotificationGetController extends Controller
             [
                 'ok' => true,
                 'content' => [
-                    'emailsNotification' => map(fn($email) => array_merge($email, ['mode' => 'update']), $emailsNotification->toArray())
+                    'brands' => $brands->toArray(),
+                    'total' => $brands->total(),
+                    'lastPage' => $brands->lastPage(),
+                    'currentPage' => $brands->currentPage()
                 ],
                 'errors' => []
             ],

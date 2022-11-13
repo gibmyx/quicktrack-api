@@ -15,14 +15,16 @@ final class CarsGetController extends Controller
 {
     public function __construct(
         private CarSearcher $searcher
-    )
-    {
+    ) {
     }
 
     public function __invoke(Request $request): JsonResponse
     {
         $cars = ($this->searcher)(new CarSearcherRequest(
-            $request->input('filters')
+            $request->filters ?? [],
+            $request->orderBy,
+            $request->order,
+            (int)$request->limit,
         ));
 
         if (Errors::getInstance()->hasErrors()) {
@@ -31,7 +33,7 @@ final class CarsGetController extends Controller
                     'ok' => false,
                     'content' => [],
                     'errors' => Errors::getInstance()->errorsMessage()
-                ], 
+                ],
                 JsonResponse::HTTP_BAD_REQUEST
             );
         }
@@ -40,10 +42,13 @@ final class CarsGetController extends Controller
             [
                 'ok' => true,
                 'content' => [
-                    'cars' => $cars->toArray()
+                    'cars' => $cars->toArray(),
+                    'total' => $cars->total(),
+                    'lastPage' => $cars->lastPage(),
+                    'currentPage' => $cars->currentPage()
                 ],
                 'errors' => []
-            ], 
+            ],
             JsonResponse::HTTP_OK
         );
     }

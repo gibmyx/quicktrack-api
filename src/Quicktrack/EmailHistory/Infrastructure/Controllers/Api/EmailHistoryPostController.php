@@ -2,29 +2,33 @@
 
 declare(strict_types=1);
 
-namespace Quicktrack\EmailNotification\Infrastructure\Controllers;
+namespace Quicktrack\EmailHistory\Infrastructure\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Quicktrack\EmailNotification\Application\Update\EmailNotificationUpdater;
-use Quicktrack\EmailNotification\Application\Update\EmailNotificationUpdaterRequest;
+use Quicktrack\EmailHistory\Application\Create\EmailHistoryCreator;
+use Quicktrack\EmailHistory\Application\Create\EmailHistoryCreatorRequest;
 use Shared\Domain\Errors;
 
-final class EmailNotificationPutController extends Controller
+final class EmailHistoryPostController extends Controller
 {
     public function __construct(
-        private EmailNotificationUpdater $updater
+        private EmailHistoryCreator $creator
     ) {
     }
 
-    public function __invoke(string $id, Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
         try {
-            ($this->updater)(new EmailNotificationUpdaterRequest(
-                $id,
+            ($this->creator)(new EmailHistoryCreatorRequest(
+                $request->id ?? '',
+                $request->code ?? '',
                 $request->name ?? '',
-                $request->email ?? ''
+                $request->email ?? '',
+                $request->phone ?? '',
+                $request->message ?? '',
+                $request->type ?? '',
             ));
             return $this->response();
         } catch (\Exception $exception) {

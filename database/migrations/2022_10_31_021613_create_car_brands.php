@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('id');
             $table->string('value')->nullable(false)->unique();
             $table->string('name')->nullable(false);
+            $table->string('status')->nullable(false);
             $table->primary('id');
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_brands');
+        Schema::dropIfExists('cars_brand');
     }
 };
