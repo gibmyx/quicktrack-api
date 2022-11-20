@@ -36,6 +36,20 @@ final class Brand
         );
     }
 
+    public static function create(
+        BrandId $id,
+        BrandValue $value,
+        BrandName $name,
+        BrandStatus $status
+    ): self {
+        return new self(
+            $id,
+            $value,
+            $name,
+            $status
+        );
+    }
+
     public function toArray(): array
     {
         return [
@@ -64,5 +78,26 @@ final class Brand
     public function status(): BrandStatus
     {
         return $this->status;
+    }
+
+    public function changeName(BrandName $newName)
+    {
+        if (!$this->name->equals($newName)) {
+            $this->name = $newName;
+        }
+    }
+
+    public function changeValue(BrandValue $newValue)
+    {
+        if (!$this->value->equals($newValue)) {
+            $this->value = $newValue;
+        }
+    }
+
+    public function changeStatus(BrandStatus $newStatus)
+    {
+        if (!$this->status->equals($newStatus)) {
+            $this->status = $newStatus;
+        }
     }
 }
