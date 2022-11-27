@@ -32,7 +32,7 @@ final class CarUpdater
 
     public function __invoke(
         CarUpdaterRequest $request
-    )
+    ): void
     {
         $car = ($this->finder)(new CarId($request->id()));
 
@@ -45,7 +45,7 @@ final class CarUpdater
             $car->changeKilometer(new CarKilometer($request->kilometer()));
             $car->changePrice(new CarPrice($request->price()));
             $car->changeType(new CarType($request->type()));
-            $car->changeYear(new CarYear($request->year()));
+            $car->changeYear(CarYear::createFromFormat('Y', $request->year()));
             $car->changeStatus(new CarStatus($request->status()));
     
             $this->repository->update($car);
