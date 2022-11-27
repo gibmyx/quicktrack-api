@@ -27,7 +27,7 @@ final class CarNextCodeGetController extends Controller
                     'ok' => false,
                     'content' => [],
                     'errors' => Errors::getInstance()->errorsMessage()
-                ], 
+                ],
                 JsonResponse::HTTP_BAD_REQUEST
             );
         }
@@ -39,7 +39,7 @@ final class CarNextCodeGetController extends Controller
                     'code' => $code->value()
                 ],
                 'errors' => []
-            ], 
+            ],
             JsonResponse::HTTP_OK
         );
     }
