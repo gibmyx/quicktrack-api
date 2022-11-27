@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Quicktrack\User\Domain\Services;
 
-use Quicktrack\EmailHistory\Domain\Contract\EmailHistoryRepository;
-use Quicktrack\EmailHistory\Domain\ValueObjects\EmailHistoryId;
 use Quicktrack\User\Domain\Contract\UserRepository;
 use Quicktrack\User\Domain\ValueObjects\UserEmail;
+use Shared\Domain\Errors;
 use Shared\Domain\Exceptions\DomainNotExistsException;
 
 final class UserFinder
@@ -23,7 +22,9 @@ final class UserFinder
         $user = $this->repository->find($email);
 
         if (null === $user) {
-            throw new DomainNotExistsException("There's not any user with Email {$email->value()}", 400);
+            Errors::getInstance()->addError(
+                new DomainNotExistsException("There's not any user with Email {$email->value()}", 400)
+            );
         }
 
         return $user;

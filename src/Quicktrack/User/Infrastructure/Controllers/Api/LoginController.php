@@ -25,15 +25,11 @@ final class LoginController extends Controller
             return $this->response($response);
         } catch (\Exception $exception) {
 
-            $code = $exception->getCode() === 0
-                ? JsonResponse::HTTP_BAD_REQUEST
-                : $exception->getCode();
-
             return new JsonResponse([
                 'ok' => false,
                 'content' => [],
                 'errors' => [$exception->getMessage()]
-            ], $code);
+            ], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 

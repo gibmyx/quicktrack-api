@@ -15,8 +15,7 @@ final class CarPostController extends Controller
 {
     public function __construct(
         private CarCreator $creator
-    )
-    {
+    ) {
     }
 
     public function __invoke(Request $request): JsonResponse
@@ -42,7 +41,7 @@ final class CarPostController extends Controller
                     'ok' => false,
                     'content' => [],
                     'errors' => Errors::getInstance()->errorsMessage()
-                ], 
+                ],
                 Errors::getInstance()->errorsCode()
             );
         }
@@ -52,7 +51,7 @@ final class CarPostController extends Controller
                 'ok' => true,
                 'content' => [],
                 'errors' => []
-            ], 
+            ],
             JsonResponse::HTTP_OK
         );
     }

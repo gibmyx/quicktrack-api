@@ -9,6 +9,7 @@ namespace Quicktrack\User\Domain\Services;
 use Quicktrack\User\Domain\Contract\UserRepository;
 use Quicktrack\User\Domain\Entity\User;
 use Quicktrack\User\Domain\ValueObjects\UserPassword;
+use Shared\Domain\Errors;
 use Shared\Domain\Exceptions\InvalidArgumentException;
 
 final class ValidatePassword
@@ -25,7 +26,9 @@ final class ValidatePassword
         $isValid = $this->repository->validatePasssword($user, $password);
 
         if (false === $isValid) {
-            throw new InvalidArgumentException("The credentials do not match", 400);
+            Errors::getInstance()->addError(
+                new InvalidArgumentException("The credentials do not match", 400)
+            );
         }
     }
 }

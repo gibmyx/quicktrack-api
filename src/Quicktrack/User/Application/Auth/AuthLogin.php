@@ -29,9 +29,9 @@ final class AuthLogin
     {
         $userEmail = new UserEmail($request->email());
         $password = new UserPassword($request->password());
+        $user = ($this->finder)($userEmail);
 
         if (!Errors::getInstance()->hasErrors()){
-            $user = ($this->finder)($userEmail);
             ($this->validatePassword)($user, $password);
             return $this->repository->generateAuthToken($user);
         }
